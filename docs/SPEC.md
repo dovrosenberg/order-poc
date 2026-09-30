@@ -255,7 +255,7 @@ For vague lines where more than one SKU is defensible, list the acceptable SKUs 
 | 11 | Tier C customer demanding a price below floor | Floor-margin flag |
 | 12 | Mixed request: equipment schedule with 8 air handlers, several of the above issues | Realistic hard case |
 
-Also generate 2-3 extra emails that are not in the inbox, as copy-paste samples for live mode.
+Also generate 2-3 extra emails that are not in the inbox, as copy-paste samples for live mode. They live in `poc/data/sample_emails.json` (ids S01-S03, same `InboundRequest` shape) and have no answer key entries.
 
 ## Phase 2: the walkthrough app
 
@@ -270,7 +270,7 @@ The app is a guided, step-by-step replay of the Phase 1 half hour, the way you'd
 5. **What went wrong and what I changed.** Each miss grouped by cause, next to the matching `LOG.md` entries. Show the prompt or code change as a before-and-after diff.
 6. **Run 2.** The same table and scorecard, with a side-by-side comparison against run 1 and the remaining misses stated plainly.
 7. **The timeline.** The `LOG.md` entries on a timeline from minute 0 to minute 30, so the time box is visible.
-8. **Try it.** Pick any sample email and step through its six outputs: classification, extracted fields with confidence, matches with reasons, the priced line table, flags, and the draft reply. Changing a SKU or quantity re-runs the math instantly using `poc/domain/`. With a passcode, a pasted new email runs live.
+8. **Try it.** Pick any sample email and step through its six outputs: classification, extracted fields with confidence, matches with reasons, the priced line table, flags, and the draft reply. Changing a SKU or quantity re-runs the math instantly using `poc/domain/`. With a passcode, a pasted new email runs live; offer the emails in `poc/data/sample_emails.json` as one-click copy-paste samples.
 9. **What production would take.** A short list: email ingestion, NetSuite integration, a larger evaluation set from historical quotes, retrieval at real catalog size, audit logging, hosting in the portco's tenant, and a rough effort estimate.
 
 A header shows the passcode status and an "Unlock live mode" button. The design is clean and quiet; the content carries it.
