@@ -25,7 +25,8 @@ export function lineFlags(
   if (match.confidence < 0.7) flags.push('low_confidence');
   if (match.sku === null) flags.push('no_match');
   if (match.substitution) flags.push('substitution');
-  const need = ts(needBy);
+  // A date-only need-by (YYYY-MM-DD) means delivery any time that day, so measure to end of day.
+  const need = needBy && /^\d{4}-\d{2}-\d{2}$/.test(needBy) ? ts(`${needBy}T23:59:59Z`) : ts(needBy);
   const recv = ts(receivedAt);
   const days = need !== null && recv !== null ? Math.floor((need - recv) / DAY_MS) : null;
   if (pl.shortQty > 0 || (days !== null && pl.allocations.some((a) => a.leadTimeDays > days))) {

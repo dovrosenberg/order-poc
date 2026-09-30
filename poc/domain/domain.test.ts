@@ -114,6 +114,12 @@ describe('flags', () => {
   });
   it('no_match', () => expect(q(ex(), [m({ sku: null })], [pl({ sku: null, unitPrice: 0 })])).toEqual(['no_match']));
   it('substitution', () => expect(q(ex(), [m({ substitution: true })], [pl()])).toEqual(['substitution']));
+  it('short_stock: date-only need-by counts through end of day (R04: 14-day lead, received 9/28 13:05, need 10/12)', () => {
+    const line = pl({ allocations: [{ plant: 'P2', qty: 4, leadTimeDays: 14 }] });
+    expect(lineFlags(m(), line, '2026-10-12', '2026-09-28T13:05:00-04:00')).not.toContain('short_stock');
+    expect(lineFlags(m(), line, '2026-10-11', '2026-09-28T13:05:00-04:00')).toContain('short_stock');
+  });
+
   it('short_stock', () => {
     expect(q(ex(), [m()], [pl({ shortQty: 3 })])).toEqual(['short_stock']);
     expect(q(ex({ needBy: '2026-09-30' }), [m()], [pl({ allocations: [{ plant: 'P2', qty: 1, leadTimeDays: 10 }] })])).toEqual(['short_stock']);
