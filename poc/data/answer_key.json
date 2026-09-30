@@ -1,0 +1,371 @@
+[
+  {
+    "requestId": "R01",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M8-20251",
+        "qty": 20,
+        "unit": "CASE",
+        "note": "sells as 20 CASE"
+      },
+      {
+        "sku": "PL-M11-20252",
+        "qty": 10,
+        "unit": "CASE",
+        "note": "sells as 10 CASE"
+      },
+      {
+        "sku": "PL-M13-24242",
+        "qty": 8,
+        "unit": "CASE",
+        "note": "sells as 8 CASE"
+      },
+      {
+        "sku": "BG-M13-2424-6P",
+        "qty": 24,
+        "unit": "EA",
+        "note": "sells as 24 EA"
+      }
+    ],
+    "expectedFlags": []
+  },
+  {
+    "requestId": "R02",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M13-20252",
+        "qty": 40,
+        "unit": "EA",
+        "note": "sells as 4 CASE (48 EA)"
+      },
+      {
+        "sku": "RM-M8-4590",
+        "qty": 900,
+        "unit": "SF",
+        "note": "sells as 3 ROLL (1012.5 SF)"
+      }
+    ],
+    "expectedFlags": []
+  },
+  {
+    "requestId": "R03",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M8-20252",
+        "qty": 240,
+        "unit": "EA",
+        "note": "sells as 20 CASE; acceptable: PL-M8-20252, PL-M11-20252, PL-M13-20252"
+      },
+      {
+        "sku": "PL-M8-24242",
+        "qty": 120,
+        "unit": "EA",
+        "note": "sells as 10 CASE; acceptable: PL-M8-24242, PL-M11-24242, PL-M13-24242"
+      },
+      {
+        "sku": "PL-M13-24244",
+        "qty": 60,
+        "unit": "EA",
+        "note": "sells as 10 CASE (6 EA/case)"
+      },
+      {
+        "sku": "PL-M13-20254",
+        "qty": 36,
+        "unit": "EA",
+        "note": "sells as 6 CASE (6 EA/case)"
+      },
+      {
+        "sku": "FR-GV-2424",
+        "qty": 20,
+        "unit": "EA",
+        "note": "sells as 20 EA"
+      }
+    ],
+    "expectedFlags": [
+      "bid_deadline"
+    ]
+  },
+  {
+    "requestId": "R04",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "BX-M14-242412",
+        "qty": 16,
+        "unit": "EA",
+        "note": "CHT-RB14-2424; sells as 16 EA"
+      },
+      {
+        "sku": "BX-M14-122412",
+        "qty": 8,
+        "unit": "EA",
+        "note": "CHT-RB14-1224; sells as 8 EA"
+      },
+      {
+        "sku": "CB-M8-20252",
+        "qty": 6,
+        "unit": "CASE",
+        "note": "CHT-CO-2025; sells as 6 CASE"
+      },
+      {
+        "sku": "HP-9997-242412-G",
+        "qty": 4,
+        "unit": "EA",
+        "note": "CHT-HE-2424-G; sells as 4 EA"
+      },
+      {
+        "sku": "BG-M14-2424-8P",
+        "qty": 24,
+        "unit": "EA",
+        "note": "CHT-BG14-2424-8; sells as 24 EA"
+      }
+    ],
+    "expectedFlags": []
+  },
+  {
+    "requestId": "R05",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M8-16251",
+        "qty": 18,
+        "unit": "CASE",
+        "note": "sells as 18 CASE"
+      },
+      {
+        "sku": "PL-M11-20202",
+        "qty": 12,
+        "unit": "CASE",
+        "note": "sells as 12 CASE"
+      },
+      {
+        "sku": "BG-M14-1224-6P",
+        "qty": 30,
+        "unit": "EA",
+        "note": "sells as 30 EA"
+      }
+    ],
+    "expectedFlags": []
+  },
+  {
+    "requestId": "R06",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M8-20252",
+        "qty": 300,
+        "unit": "CASE",
+        "note": "sells as 300 CASE; split P1 220 + P3 80"
+      },
+      {
+        "sku": "PL-M13-24244",
+        "qty": 90,
+        "unit": "CASE",
+        "note": "sells as 90 CASE; only 80 on hand across plants"
+      },
+      {
+        "sku": "PL-M8-16201",
+        "qty": 20,
+        "unit": "CASE",
+        "note": "sells as 20 CASE"
+      }
+    ],
+    "expectedFlags": [
+      "short_stock"
+    ]
+  },
+  {
+    "requestId": "R07",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "HP-9997-242412-SG",
+        "qty": 8,
+        "unit": "EA",
+        "note": "sells as 8 EA; acceptable: HP-9997-242412-SG, HP-9997-242412-G"
+      },
+      {
+        "sku": "BX-M14-242412",
+        "qty": 8,
+        "unit": "EA",
+        "note": "sells as 8 EA; acceptable: BX-M14-242412, BG-M14-2424-6P, BG-M14-2424-8P"
+      }
+    ],
+    "expectedFlags": [
+      "low_confidence"
+    ]
+  },
+  {
+    "requestId": "R08",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M8-20251",
+        "qty": 10,
+        "unit": "CASE",
+        "note": "alias 'M8 20x25x1'; sells as 10 CASE"
+      },
+      {
+        "sku": "PL-M8-24242",
+        "qty": 6,
+        "unit": "CASE",
+        "note": "alias '2in MERV8 24x24'; sells as 6 CASE"
+      }
+    ],
+    "expectedFlags": [
+      "missing_info"
+    ]
+  },
+  {
+    "requestId": "R09",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": null,
+        "qty": 24,
+        "unit": "EA",
+        "note": "24x24x1 not in catalog; propose PL-M8-24242 (24x24x2) if the rack accepts 2in depth"
+      },
+      {
+        "sku": "PL-M13-20254",
+        "qty": 12,
+        "unit": "EA",
+        "note": "MERV 16 pleated not made; substitute MERV 13; sells as 2 CASE (12 EA)"
+      }
+    ],
+    "expectedFlags": [
+      "no_match",
+      "substitution"
+    ]
+  },
+  {
+    "requestId": "R10",
+    "classification": "order_status",
+    "lines": [],
+    "expectedFlags": []
+  },
+  {
+    "requestId": "R11",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M13-20252",
+        "qty": 30,
+        "unit": "CASE",
+        "note": "sells as 30 CASE; target $72.00/CASE is below floor $80.68"
+      }
+    ],
+    "expectedFlags": [
+      "below_floor"
+    ]
+  },
+  {
+    "requestId": "R12",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "sku": "PL-M8-20252",
+        "qty": 12,
+        "unit": "EA",
+        "note": "AHU-1 pre; sells as 1 CASE (12 EA)"
+      },
+      {
+        "sku": "PL-M13-20252",
+        "qty": 12,
+        "unit": "EA",
+        "note": "AHU-1 final, RNO-13-20252; sells as 1 CASE (12 EA)"
+      },
+      {
+        "sku": "PL-M8-16251",
+        "qty": 16,
+        "unit": "EA",
+        "note": "AHU-2 pre, RNO-8-16251; sells as 2 CASE (24 EA)"
+      },
+      {
+        "sku": "PL-M13-24244",
+        "qty": 6,
+        "unit": "EA",
+        "note": "AHU-2 final; sells as 1 CASE (6 EA)"
+      },
+      {
+        "sku": "PL-M8-24242",
+        "qty": 9,
+        "unit": "EA",
+        "note": "AHU-3 pre; sells as 1 CASE (12 EA)"
+      },
+      {
+        "sku": "BG-M14-2424-8P",
+        "qty": 9,
+        "unit": "EA",
+        "note": "AHU-3 final; sells as 9 EA"
+      },
+      {
+        "sku": null,
+        "qty": 8,
+        "unit": "EA",
+        "note": "AHU-4 pre, 18x24x2 not in catalog; propose field-cut roll media RM-M8-3090 or confirm a 20x25x2 PL-M8-20252 retrofit"
+      },
+      {
+        "sku": "PL-M13-20204",
+        "qty": 8,
+        "unit": "EA",
+        "note": "AHU-4 final; sells as 2 CASE (12 EA)"
+      },
+      {
+        "sku": "PL-M8-20252",
+        "qty": 6,
+        "unit": "EA",
+        "note": "AHU-5 pre; sells as 1 CASE (12 EA)"
+      },
+      {
+        "sku": "PL-M11-20254",
+        "qty": 6,
+        "unit": "EA",
+        "note": "AHU-5 final; sells as 1 CASE (6 EA)"
+      },
+      {
+        "sku": "PL-M8-16252",
+        "qty": 10,
+        "unit": "EA",
+        "note": "AHU-6 pre; sells as 1 CASE (12 EA)"
+      },
+      {
+        "sku": "PL-M13-16254",
+        "qty": 10,
+        "unit": "EA",
+        "note": "AHU-6 final; sells as 2 CASE (12 EA)"
+      },
+      {
+        "sku": "RM-M8-3090",
+        "qty": 400,
+        "unit": "LF",
+        "note": "AHU-7 pre, RNO-MR30; sells as 5 ROLL (450 LF)"
+      },
+      {
+        "sku": "PL-M13-20252",
+        "qty": 12,
+        "unit": "EA",
+        "note": "AHU-7 final, RNO-13-20252; sells as 1 CASE (12 EA)"
+      },
+      {
+        "sku": "PL-M8-24242",
+        "qty": 4,
+        "unit": "EA",
+        "note": "AHU-8 pre; sells as 1 CASE (12 EA)"
+      },
+      {
+        "sku": "BX-M14-242412",
+        "qty": 4,
+        "unit": "EA",
+        "note": "AHU-8 final; sells as 4 EA"
+      }
+    ],
+    "expectedFlags": [
+      "missing_info",
+      "no_match"
+    ]
+  }
+]

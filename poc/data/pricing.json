@@ -1,0 +1,13 @@
+{
+  "tierDiscount": { "A": 0.18, "B": 0.12, "C": 0.05 },
+  "volumeBreaks": [
+    { "minPallets": 2, "extraDiscount": 0.03 },
+    { "minPallets": 5, "extraDiscount": 0.05 },
+    { "minPallets": 10, "extraDiscount": 0.08 }
+  ],
+  "freight": {
+    "freeOverUsd": 5000,
+    "perPalletUsd": { "midwest": 95, "southeast": 120, "west": 165 }
+  },
+  "floorMarginPct": 0.22
+}

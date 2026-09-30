@@ -1,0 +1,13 @@
+Customer ID,Company Name,Customer Type,Price Level,Sales Region,Email Domain,Default Ship To,Notes
+C01,Lakeshore Mechanical Supply,distributor,A,midwest,lakeshoremech.example,"4410 Chicago Dr SW, Grandville, MI 49418",prefers cases; stocking order most Mondays
+C02,Cumberland MRO Distribution,distributor,A,southeast,cumberlandmro.example,"1275 Riverfront Industrial Pkwy, Chattanooga, TN 37406",uses CHT- legacy part numbers on POs
+C03,Sierra Basin HVAC Supply,distributor,B,west,sierrabasinhvac.example,"2380 Glendale Ave, Sparks, NV 89431",orders RNO- roll media by part number
+C04,Ridgeway Mechanical Contractors,contractor,B,midwest,ridgewaymech.example,"815 E Fifth St, Dayton, OH 45402",job-site deliveries; needs job name on quote
+C05,Palmetto Air Services,contractor,C,southeast,palmettoair.example,"302 Frontage Rd, Greenville, SC 29611",price-sensitive; often sends target price
+C06,Crestline Facility Services,facility_mgmt,B,west,crestlinefs.example,,multiple sites; ship-to must be confirmed per order
+C07,Harborview Property Management,facility_mgmt,B,southeast,harborviewpm.example,"1640 Peachtree Industrial Blvd, Norcross, GA 30071",quarterly PM filter changeouts
+C08,Kettle River School District (Purchasing),public_bid,B,midwest,kettleriversd.example,"2100 Maintenance Way, Moose Lake, MN 55767",bid desk; needs bid # on quote
+C09,St. Brendan Regional Medical Center (Facilities Bid Desk),public_bid,B,southeast,stbrendanmed.example,"900 Medical Center Dr, Huntsville, AL 35801",bid desk; cite spec section on every line
+C10,Great Plains Building Supply,distributor,A,midwest,greatplainsbs.example,"6725 W Industrial Ave, Peoria, IL 61604",full-pallet buyer; asks for pallet breaks
+C11,Tri-County Mechanical,contractor,B,west,tricountymech.example,"3150 W Lincoln St, Phoenix, AZ 85009",will-call pickup accepted
+C12,Summit Ridge Facilities Group,facility_mgmt,C,west,summitridgefg.example,"455 W 2100 S, Salt Lake City, UT 84115",net 30; PO required before release

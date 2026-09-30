@@ -1,0 +1,54 @@
+Legacy / Alt Part #,NAF Item Number,Source,Comment
+CHT-RB14-2424,BX-M14-242412,plant2,Chattanooga rigid box legacy PN
+CHT-RB14-1224,BX-M14-122412,plant2,Chattanooga rigid box legacy PN
+CHT-CO-2025,CB-M8-20252,plant2,Chattanooga carbon odor legacy PN
+CHT-CO-2424,CB-M8-24242,plant2,Chattanooga carbon odor legacy PN
+CHT-HE-2424-G,HP-9997-242412-G,plant2,HEPA galvanized frame legacy PN
+CHT-HE-2424-SG,HP-9997-242412-SG,plant2,HEPA stainless gel-seal legacy PN
+CHT-BG14-2424-8,BG-M14-2424-8P,plant2,Chattanooga bag legacy PN
+CHT-BG14-1224-8,BG-M14-1224-8P,plant2,Chattanooga bag legacy PN
+CHT-BG14-2424-6,BG-M14-2424-6P,plant2,Chattanooga bag legacy PN
+CHT-BG14-1224-6,BG-M14-1224-6P,plant2,Chattanooga bag legacy PN
+CHT-BG13-2424-8,BG-M13-2424-8P,plant2,Chattanooga bag legacy PN
+CHT-BG13-1224-8,BG-M13-1224-8P,plant2,Chattanooga bag legacy PN
+CHT-BG13-2424-6,BG-M13-2424-6P,plant2,Chattanooga bag legacy PN
+CHT-BG13-1224-6,BG-M13-1224-6P,plant2,Chattanooga bag legacy PN
+400112,BX-M14-242412,plant2,pre-2015 numeric PN (old AS/400 system)
+400113,BX-M14-122412,plant2,pre-2015 numeric PN (old AS/400 system)
+410240,HP-9997-242412-G,plant2,pre-2015 numeric PN (old AS/400 system)
+410241,HP-9997-242412-SG,plant2,pre-2015 numeric PN (old AS/400 system)
+420250,CB-M8-20252,plant2,pre-2015 numeric PN (old AS/400 system)
+420240,CB-M8-24242,plant2,pre-2015 numeric PN (old AS/400 system)
+430288,BG-M14-2424-8P,plant2,pre-2015 numeric PN (old AS/400 system)
+RNO-8-16201,PL-M8-16201,plant3,Reno pleated legacy PN
+RNO-8-16251,PL-M8-16251,plant3,Reno pleated legacy PN
+RNO-8-20201,PL-M8-20201,plant3,Reno pleated legacy PN
+RNO-8-20251,PL-M8-20251,plant3,Reno pleated legacy PN
+RNO-8-16252,PL-M8-16252,plant3,Reno pleated legacy PN
+RNO-8-20252,PL-M8-20252,plant3,Reno pleated legacy PN
+RNO-8-20202,PL-M8-20202,plant3,Reno pleated legacy PN
+RNO-8-24242,PL-M8-24242,plant3,Reno pleated legacy PN
+RNO-11-20252,PL-M11-20252,plant3,Reno pleated legacy PN
+RNO-11-24242,PL-M11-24242,plant3,Reno pleated legacy PN
+RNO-11-20254,PL-M11-20254,plant3,Reno pleated legacy PN
+RNO-11-24244,PL-M11-24244,plant3,Reno pleated legacy PN
+RNO-13-16252,PL-M13-16252,plant3,Reno pleated legacy PN
+RNO-13-20252,PL-M13-20252,plant3,Reno pleated legacy PN
+RNO-13-24242,PL-M13-24242,plant3,Reno pleated legacy PN
+RNO-13-20254,PL-M13-20254,plant3,Reno pleated legacy PN
+RNO-13-24244,PL-M13-24244,plant3,Reno pleated legacy PN
+RNO-MR30,RM-M8-3090,plant3,Reno roll media 30in x 90ft
+RNO-MR45,RM-M8-4590,plant3,Reno roll media 45in x 90ft
+M8 20x25x1,PL-M8-20251,customer,buyer shorthand
+2in MERV8 24x24,PL-M8-24242,customer,buyer shorthand
+6pk bag 24x24 M13,BG-M13-2424-6P,customer,buyer shorthand
+20x25x2 M8,PL-M8-20252,customer,buyer shorthand
+16x25x1 M8,PL-M8-16251,customer,buyer shorthand
+MERV8 16x20x1,PL-M8-16201,customer,buyer shorthand
+20x20x1 pleated,PL-M8-20201,customer,MERV not stated; only 1in pleat is MERV 8
+M11 20x20x2,PL-M11-20202,customer,buyer shorthand
+24x24x2 MERV 11,PL-M11-24242,customer,buyer shorthand
+2in M13 16x25,PL-M13-16252,customer,buyer shorthand
+4in MERV13 20x25,PL-M13-20254,customer,buyer shorthand
+MERV 13 24x24x4,PL-M13-24244,customer,buyer shorthand
+8pk bag 24x24 M14,BG-M14-2424-8P,customer,buyer shorthand

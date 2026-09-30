@@ -1,0 +1,100 @@
+[
+  {
+    "id": "R01",
+    "receivedAt": "2026-09-28T07:42:00-04:00",
+    "from": "Mike Dombrowski <mdombrowski@lakeshoremech.example>",
+    "subject": "RFQ - stock order wk of 10/5",
+    "body": "Morning,\n\nPlease quote the following for our Monday stock order. Ship to our Grandville warehouse as usual (4410 Chicago Dr SW, Grandville MI 49418). Need it on the dock by Mon 10/5.\n\nPL-M8-20251   qty 20 cases\nPL-M11-20252  qty 10 cases\nPL-M13-24242  qty 8 cases\nBG-M13-2424-6P  qty 24 each\n\nThx,\nMike Dombrowski\nInside Sales / Purchasing\nLakeshore Mechanical Supply\no: 616-555-0142",
+    "scenarioNote": "Happy path: distributor names exact NAF part numbers with units, ship-to and date. No flags expected."
+  },
+  {
+    "id": "R02",
+    "receivedAt": "2026-09-28T10:15:00-04:00",
+    "from": "Tanya Reyes <treyes@ridgewaymech.example>",
+    "subject": "quote - Dayton Public Library RTU job",
+    "body": "Hi,\n\nNeed pricing for the Dayton Public Library RTU changeout job.\n\n- 40 single filters, 20x25x2 MERV 13\n- 900 sq ft of the 45\" wide MERV 8 roll media (for the make up air units)\n\nPlease deliver to our shop at 815 E Fifth St, Dayton OH 45402, need by Friday Oct 9. Job name on the quote pls: DPL RTU Changeout.\n\nthanks\nTanya\n\n--\nTanya Reyes | Project Coordinator\nRidgeway Mechanical Contractors\n937-555-0188\nSent from my iPhone",
+    "scenarioNote": "Case and roll rounding: 40 EA must round up to 4 CASE of 12; 900 SF must round up to 3 ROLL of 337.5 SF."
+  },
+  {
+    "id": "R03",
+    "receivedAt": "2026-09-29T08:20:00-05:00",
+    "from": "Janet Halvorsen <jhalvorsen@kettleriversd.example>",
+    "subject": "Bid #KRSD-2026-117 HVAC Filters - responses due 9/30 2:00 PM",
+    "body": "Good morning,\n\nKettle River School District is requesting pricing for HVAC filters per the attached bid tab (Bid #KRSD-2026-117). All items must meet spec section 23 41 00 as noted. Please return unit pricing per each on the bid tab.\n\nRESPONSES ARE DUE WEDNESDAY 9/30/2026 AT 2:00 PM CENTRAL. Late responses will not be accepted.\n\nDeliver to District Maintenance, 2100 Maintenance Way, Moose Lake MN 55767, no later than 10/23/2026. Dock hours 6:30-2:30.\n\nJanet Halvorsen\nPurchasing Coordinator\nKettle River School District\n218-555-0131",
+    "attachmentText": "BID TAB - KRSD-2026-117 - HVAC FILTERS\nBidder: ______________________\n\nItem | Spec Ref              | Description                          | Size (nom) | Min MERV | Qty | UOM | Unit Price | Ext\n-----+-----------------------+--------------------------------------+------------+----------+-----+-----+------------+-----\n1    | KRSD 23 41 00 / 2.2.A | Pleated prefilter, 2in               | 20x25x2    | 8        | 240 | EA  |            |\n2    | KRSD 23 41 00 / 2.2.A | Pleated prefilter, 2in               | 24x24x2    | 8        | 120 | EA  |            |\n3    | KRSD 23 41 00 / 2.2.B | Pleated final, 4in                   | 24x24x4    | 13       | 60  | EA  |            |\n4    | KRSD 23 41 00 / 2.2.B | Pleated final, 4in                   | 20x25x4    | 13       | 36  | EA  |            |\n5    | KRSD 23 41 00 / 2.3.A | Holding frame, galvanized            | 24x24      | --       | 20  | EA  |            |\n\nBids due 9/30/2026 2:00 PM CST. Substitutions must meet or exceed listed min MERV.",
+    "scenarioNote": "School bid tab cites only KRSD spec codes with size and MERV, no part numbers. Tests spec crosswalk and bid_deadline (due about 30 h after receipt)."
+  },
+  {
+    "id": "R04",
+    "receivedAt": "2026-09-28T13:05:00-04:00",
+    "from": "Darnell Pruitt <dpruitt@cumberlandmro.example>",
+    "subject": "PO pricing request - CHT items",
+    "body": "Hey team,\n\nCan I get updated pricing on these before I cut the PO. Same old Chattanooga numbers we always use:\n\nCHT-RB14-2424 - 16 ea\nCHT-RB14-1224 - 8 ea\nCHT-CO-2025 - 6 cs\nCHT-HE-2424-G - 4 ea\nCHT-BG14-2424-8 - 24 ea\n\nShip to our Riverfront whse (1275 Riverfront Industrial Pkwy, Chattanooga TN 37406). Need by 10/12 if possible.\n\nThanks,\nDarnell Pruitt\nPurchasing Mgr, Cumberland MRO Distribution\n423-555-0170\n\nCONFIDENTIALITY NOTICE: This e-mail is intended only for the addressee.",
+    "scenarioNote": "Plant 2 legacy part numbers only (CHT- aliases). Tests alias matching."
+  },
+  {
+    "id": "R05",
+    "receivedAt": "2026-09-29T11:48:00-07:00",
+    "from": "Kelsey Tran <ktran@sierrabasinhvac.example>",
+    "subject": "FW: FW: filters for Washoe Cty jobs",
+    "body": "Hi NAF - can you quote the request at the bottom? Ship to our Sparks branch. Thx!\n\nKelsey Tran | Counter Sales\nSierra Basin HVAC Supply | 2380 Glendale Ave, Sparks NV 89431\n775-555-0119\n\n---------- Forwarded message ---------\nFrom: Rob Kessler <rkessler@sierrabasinhvac.example>\nDate: Tue, Sep 29, 2026 at 9:02 AM\nSubject: FW: filters for Washoe Cty jobs\nTo: Kelsey Tran\n\nKelsey - can you get this to NAF? FYI last time we did this for them it was PO 44871, 22 cases, invoice came to $3,212.50 and they paid in 45 days not 30, so heads up. Also they still owe us for the 14 belts from August. Call me at x214 if questions.\n\nRob\n\n---------- Forwarded message ---------\nFrom: Gary Lindqvist <glindqvist@highdesertsvc.example>\nDate: Mon, Sep 28, 2026 at 4:37 PM\nSubject: filters for Washoe Cty jobs\nTo: Rob Kessler\n\nRob,\n\nFor the county buildings (Bldg 3 and Bldg 11, about 26 RTUs total) I need:\n\n18 cases 16x25x1 MERV 8\n12 cases 20x20x2 MERV 11\n30 each 12x24 6 pocket bags MERV 14\n\nNeed them by Friday 10/9. Deliver to your Sparks store, we'll pick up there.\n\nThanks\nGary L.\nHigh Desert Service Co.\n775-555-0163",
+    "scenarioNote": "Forwarded chain; the real request is three messages down. Earlier messages contain distracting numbers (PO 44871, 22 cases, $3,212.50, 14 belts, x214, 26 RTUs)."
+  },
+  {
+    "id": "R06",
+    "receivedAt": "2026-09-29T09:30:00-05:00",
+    "from": "Brenda Vogel <bvogel@greatplainsbs.example>",
+    "subject": "Q4 pallet buy - pleated",
+    "body": "Hello,\n\nPutting together our Q4 pallet buy. Please quote:\n\n- PL-M8-20252 (20x25x2 MERV 8): 300 cases\n- PL-M13-24244 (24x24x4 MERV 13): 90 cases\n- PL-M8-16201 (16x20x1 MERV 8): 20 cases\n\nShip to Peoria DC, 6725 W Industrial Ave, Peoria IL 61604. Need everything by 10/16. Please show pallet breaks and freight.\n\nRegards,\nBrenda Vogel\nCategory Buyer - HVAC\nGreat Plains Building Supply\n309-555-0156",
+    "scenarioNote": "Large order: 300 CASE PL-M8-20252 exceeds P1 stock (220) and must split P1+P3; 90 CASE PL-M13-24244 exceeds total stock (80) so short_stock."
+  },
+  {
+    "id": "R07",
+    "receivedAt": "2026-09-30T08:05:00-05:00",
+    "from": "Cheryl Ambrose <cambrose@stbrendanmed.example>",
+    "subject": "Filters for OR 4 air handler",
+    "body": "Hello,\n\nFacilities is replacing filters on the air handler serving OR 4 and OR 5. Could you recommend and quote the best filters for a hospital operating room air handler? Our engineer says the terminal filters need to meet SBRMC 23 41 33 / 2.1.A and the final bank is SBRMC 23 41 00 / 2.2.C.\n\nI think it's 8 of the terminal HEPAs (24x24) and 8 of the finals (also 24x24) but I'm not 100% sure, maintenance is double-checking.\n\nDeliver to Central Receiving, 900 Medical Center Dr, Huntsville AL 35801 by 10/16.\n\nThank you,\nCheryl Ambrose\nFacilities Bid Desk\nSt. Brendan Regional Medical Center\n256-555-0104",
+    "scenarioNote": "Vague request ('best filters for a hospital OR air handler') with spec codes but no part numbers. More than one SKU is defensible per line. Expect low_confidence and alternatives offered."
+  },
+  {
+    "id": "R08",
+    "receivedAt": "2026-09-29T15:22:00-07:00",
+    "from": "Luis Ortega <lortega@crestlinefs.example>",
+    "subject": "filters quote",
+    "body": "Hi there,\n\ncan you send me a price on\n\nM8 20x25x1 - 10 cases\n2in MERV8 24x24 - 6 cases\n\nthanks!\nLuis\n\nLuis Ortega\nMaintenance Supervisor\nCrestline Facility Services\nSent from Outlook for Android",
+    "scenarioNote": "Customer shorthand aliases; no ship-to (customer has no default ship-to) and no delivery date. Expect missing_info only; reply should ask only for those."
+  },
+  {
+    "id": "R09",
+    "receivedAt": "2026-09-28T14:40:00-06:00",
+    "from": "Amy Christensen <achristensen@summitridgefg.example>",
+    "subject": "RE: filter pricing - Millcreek office bldg",
+    "body": "Hi,\n\nFollowing up on my voicemail. For the Millcreek office building we need:\n\n1) 24x24x1 MERV 8 pleated - 24 each\n2) 20x25x4 MERV 16 pleated - 12 each (tenant is asking for MERV 16 for the 3rd floor)\n\nShip to our SLC shop, 455 W 2100 S, Salt Lake City UT 84115. Need by 10/14. PO will follow once we approve the quote.\n\nAmy Christensen\nFacilities Coordinator\nSummit Ridge Facilities Group\n\n> On Fri, Sep 25, 2026, NAF Sales wrote:\n> Hi Amy, happy to help, send over the list when you have it.",
+    "scenarioNote": "Size NAF doesn't make (24x24x1; NAF only makes 24x24x2) -> no_match, and rating NAF doesn't make (MERV 16 pleated) -> substitute nearest MERV 13."
+  },
+  {
+    "id": "R10",
+    "receivedAt": "2026-09-30T10:12:00-04:00",
+    "from": "Denise Walker <dwalker@harborviewpm.example>",
+    "subject": "Where is SO 58213??",
+    "body": "Hi,\n\nChecking on our sales order SO 58213 (our PO HPM-7731) for the Q4 changeouts. It was supposed to ship last Thursday and we haven't gotten tracking. Techs are scheduled at the Norcross properties Monday. Can someone tell me when it's going to ship?\n\nThanks,\nDenise Walker\nProperty Operations\nHarborview Property Management\n770-555-0127",
+    "scenarioNote": "Order status question, not a quote. Classifier should route it away; no lines."
+  },
+  {
+    "id": "R11",
+    "receivedAt": "2026-09-30T07:55:00-04:00",
+    "from": "Wade Simmons <wsimmons@palmettoair.example>",
+    "subject": "20x25x2 MERV 13 - need your best",
+    "body": "Hey,\n\nNeed 30 cases of the 20x25x2 MERV 13 (PL-M13-20252). I'm getting these for $72.00 a case from another supplier so you need to be at $72 or better or I'm going with them. Ship to 302 Frontage Rd, Greenville SC 29611, need by 10/8.\n\nLet me know today.\n\nWade Simmons\nOwner, Palmetto Air Services\n864-555-0193",
+    "scenarioNote": "Tier C customer demands $72.00/CASE for PL-M13-20252. Std. Cost 62.93; floor price = 62.93 / 0.78 = 80.68; margin at $72 = 12.6% < 22%. Expect below_floor."
+  },
+  {
+    "id": "R12",
+    "receivedAt": "2026-09-30T12:34:00-07:00",
+    "from": "Jordan Pike <jpike@tricountymech.example>",
+    "subject": "Maricopa Clinic reno - AHU filters per M-601",
+    "body": "NAF,\n\nAttached is the AHU schedule off sheet M-601 for the Maricopa Community Clinic reno. Please quote one full set of filters for AHU-1 thru AHU-8, prefilters and finals, per the schedule. Note AHU-7 uses your RNO roll media and we need 400 LF of it.\n\nShip direct to the jobsite, NOT our shop - I'll get you the site address once the GC confirms which gate deliveries go to. Timing depends on when TAB is scheduled, prob mid/late Oct, will confirm.\n\nAlso, AHU-4 prefilter is an odd size, let me know what you can do.\n\nJordan Pike\nEstimator / PM\nTri-County Mechanical\n602-555-0148\n\"If it moves air, we move it.\" ",
+    "attachmentText": "MECHANICAL EQUIPMENT SCHEDULE - AIR HANDLING UNITS (FILTER DATA)\nProject: Maricopa Community Clinic Renovation   Sheet M-601   Rev 2\n\nTAG   | SERVES           | PREFILTER                              | QTY | FINAL FILTER                          | QTY\n------+------------------+----------------------------------------+-----+---------------------------------------+----\nAHU-1 | Lobby/Admin      | 2\" pleated MERV 8, 20x25x2             | 12  | RNO-13-20252                          | 12\nAHU-2 | Exam wing A      | RNO-8-16251                            | 16  | 4\" pleated MERV 13, 24x24x4           | 6\nAHU-3 | Exam wing B      | 2\" pleated MERV 8, 24x24x2             | 9   | Bag MERV 14, 8 pocket, 24x24          | 9\nAHU-4 | Imaging          | 2\" pleated MERV 8, 18x24x2             | 8   | 4\" pleated MERV 13, 20x20x4           | 8\nAHU-5 | Lab              | 2\" pleated MERV 8, 20x25x2             | 6   | 4\" pleated MERV 11, 20x25x4           | 6\nAHU-6 | Offices 2nd fl   | 2\" pleated MERV 8, 16x25x2             | 10  | 4\" pleated MERV 13, 16x25x4           | 10\nAHU-7 | Kitchen/MAU      | RNO-MR30 roll media, cut to fit        | 400 LF | RNO-13-20252                       | 12\nAHU-8 | Pharmacy         | 2\" pleated MERV 8, 24x24x2             | 4   | Rigid box MERV 14, 24x24x12           | 4\n\nNOTES: 1. Filter qty is per unit, one full set each.  2. Filter sizes nominal.  3. Provide one spare set of prefilters for AHU-1 only (by owner, NIC).",
+    "scenarioNote": "Realistic hard case: 8-AHU equipment schedule mixing plant3 aliases (RNO-), nominal sizes, roll media in LF (400 LF -> 5 ROLL), one size NAF doesn't make (18x24x2), and missing ship-to address and need-by date. Expect missing_info and no_match."
+  }
+]

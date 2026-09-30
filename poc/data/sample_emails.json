@@ -1,0 +1,26 @@
+[
+  {
+    "id": "S01",
+    "receivedAt": "2026-09-30T09:10:00-04:00",
+    "from": "Mike Dombrowski <mdombrowski@lakeshoremech.example>",
+    "subject": "reorder - same as last week + bags",
+    "body": "Hi,\n\nSame as last week's stock order please, plus a few bags:\n\nPL-M8-20251 - 15 cs\nPL-M8-16251 - 10 cs\n6pk bag 24x24 M13 - 18 ea\n\nShip to Grandville (4410 Chicago Dr SW, Grandville MI 49418), need by 10/9.\n\nThx\nMike\nLakeshore Mechanical Supply",
+    "scenarioNote": "Live-mode sample: reorder from an A-tier distributor mixing part numbers and a customer alias ('6pk bag 24x24 M13' -> BG-M13-2424-6P). Expected: 15 CASE PL-M8-20251, 10 CASE PL-M8-16251, 18 EA BG-M13-2424-6P; no flags."
+  },
+  {
+    "id": "S02",
+    "receivedAt": "2026-09-30T13:45:00-05:00",
+    "from": "Janet Halvorsen <jhalvorsen@kettleriversd.example>",
+    "subject": "Quick quote - Elementary school AHU finals",
+    "body": "Hello,\n\nNot a formal bid, just a quick quote for Riverside Elementary. Need 4\" final filters per KRSD 23 41 00 / 2.2.B:\n\n20x20x4 - 24 each\n16x25x4 - 12 each\n\nDeliver to District Maintenance, 2100 Maintenance Way, Moose Lake MN 55767 by 10/21.\n\nJanet Halvorsen\nPurchasing Coordinator\nKettle River School District",
+    "scenarioNote": "Live-mode sample: spec-code request with sizes. Expected: PL-M13-20204 24 EA (4 CASE), PL-M13-16254 12 EA (2 CASE); no flags."
+  },
+  {
+    "id": "S03",
+    "receivedAt": "2026-09-30T15:05:00-07:00",
+    "from": "Kelsey Tran <ktran@sierrabasinhvac.example>",
+    "subject": "roll media + 13s",
+    "body": "Hi NAF,\n\npls quote:\nRNO-MR45 - 1,500 sq ft\nRNO-13-20252 - 8 cases\n\nShip to Sparks. Need asap, no later than 10/7.\n\nKelsey Tran | Counter Sales\nSierra Basin HVAC Supply\n2380 Glendale Ave, Sparks NV 89431",
+    "scenarioNote": "Live-mode sample: plant3 aliases with roll media in SF. Expected: RM-M8-4590 1500 SF -> 5 ROLL (1687.5 SF), PL-M13-20252 8 CASE; no flags."
+  }
+]

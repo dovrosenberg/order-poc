@@ -1,0 +1,19 @@
+Spec Section,Issuer,Requirement,Min MERV,Filter Type,Acceptable NAF Items
+KRSD 23 41 00 / 2.2.A,school_district,"2"" pleated prefilter, MERV 8 minimum",8,pleated,PL-M8-16252;PL-M8-20252;PL-M8-24242;PL-M8-20202;PL-M11-16202;PL-M11-16252;PL-M11-20202;PL-M11-20252;PL-M11-24242;PL-M13-16252;PL-M13-20202;PL-M13-20252;PL-M13-24242
+KRSD 23 41 00 / 2.2.B,school_district,"4"" pleated final filter, MERV 13 minimum",13,pleated,PL-M13-16254;PL-M13-20204;PL-M13-20254;PL-M13-24244
+KRSD 23 41 00 / 2.3.A,school_district,Galvanized holding frame,0,frame,FR-GV-2424;FR-GV-1224
+SBRMC 23 41 33 / 2.1.A,hospital,"HEPA 99.97% @ 0.3 micron terminal filter, surgical suites",16,hepa,HP-9997-242412-G;HP-9997-242412-SG
+SBRMC 23 41 00 / 2.2.C,hospital,"MERV 14 final filter, bag or rigid box",14,box,BX-M14-242412;BX-M14-122412;BG-M14-2424-6P;BG-M14-1224-6P;BG-M14-2424-8P;BG-M14-1224-8P
+SBRMC 23 41 00 / 2.1.A,hospital,"2"" pleated prefilter ahead of final filter bank, MERV 8 minimum",8,pleated,PL-M8-16252;PL-M8-20252;PL-M8-24242;PL-M8-20202;PL-M11-16202;PL-M11-16252;PL-M11-20202;PL-M11-20252;PL-M11-24242;PL-M13-16252;PL-M13-20202;PL-M13-20252;PL-M13-24242
+PVRH 23 41 00 / 2.1.A,hospital,"4"" pleated prefilter, MERV 13 minimum",13,pleated,PL-M13-16254;PL-M13-20204;PL-M13-20254;PL-M13-24244
+PVRH 23 41 00 / 2.2.A,hospital,"Bag final filter, MERV 14 minimum",14,bag,BG-M14-2424-6P;BG-M14-1224-6P;BG-M14-2424-8P;BG-M14-1224-8P
+PVRH 23 41 33 / 2.1.B,hospital,"HEPA 99.97% @ 0.3 micron, airborne isolation room exhaust",16,hepa,HP-9997-242412-G;HP-9997-242412-SG
+LVUSD 23 41 00 / 2.1.A,school_district,"1"" pleated return grille filter, MERV 8 minimum",8,pleated,PL-M8-16201;PL-M8-16251;PL-M8-20201;PL-M8-20251
+LVUSD 23 41 00 / 2.1.B,school_district,"2"" pleated classroom unit ventilator filter, MERV 11 minimum",11,pleated,PL-M11-16202;PL-M11-16252;PL-M11-20202;PL-M11-20252;PL-M11-24242;PL-M13-16252;PL-M13-20202;PL-M13-20252;PL-M13-24242
+LVUSD 23 41 00 / 2.2.A,school_district,"Bag final filter for AHUs, MERV 13 minimum",13,bag,BG-M13-2424-6P;BG-M13-1224-6P;BG-M13-2424-8P;BG-M13-1224-8P;BG-M14-2424-6P;BG-M14-1224-6P;BG-M14-2424-8P;BG-M14-1224-8P
+LVUSD 23 41 00 / 2.4.A,school_district,"Kitchen hood makeup air odor filter, activated carbon pleated",8,carbon,CB-M8-20252;CB-M8-24242
+CITY-WB 23 41 00 / 2.1.A,municipal,"Synthetic roll media for makeup air units, MERV 8 minimum",8,media,RM-M8-3090;RM-M8-4590
+CITY-WB 23 41 00 / 2.2.A,municipal,"4"" pleated filter, MERV 11 minimum",11,pleated,PL-M11-20254;PL-M11-24244;PL-M13-16254;PL-M13-20204;PL-M13-20254;PL-M13-24244
+CITY-WB 23 41 00 / 2.2.B,municipal,"2"" pleated filter, public library, MERV 13 minimum",13,pleated,PL-M13-16252;PL-M13-20202;PL-M13-20252;PL-M13-24242
+CITY-WB 23 41 00 / 2.3.A,municipal,"Galvanized holding frame, 16-ga minimum",0,frame,FR-GV-2424;FR-GV-1224
+CITY-WB 23 41 00 / 2.5.A,municipal,"Activated carbon odor filter, wastewater plant admin building",8,carbon,CB-M8-20252;CB-M8-24242
