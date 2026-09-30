@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import { data } from '../data';
+
+const lineTotal = data.answerKey.reduce((n, k) => n + k.lines.length, 0);
+const flagTotal = data.answerKey.reduce((n, k) => n + k.expectedFlags.length, 0);
+const metrics = [
+  { name: 'Classification', unit: `${data.answerKey.length} emails`, hit: 'Predicted class equals the answer key class' },
+  { name: 'SKU match', unit: `${lineTotal} expected lines`, hit: 'Matched SKU is the key SKU, or one listed as acceptable for a vague line' },
+  { name: 'Quantity / unit', unit: `${lineTotal} expected lines`, hit: 'Extracted quantity and unit both equal the key, as the customer wrote them' },
+  { name: 'Flag recall', unit: `${flagTotal} expected flags`, hit: 'Each flag the key expects is raised on that email' },
+];
 const steps = [
   { name: 'Classify', kind: 'LLM', does: 'Quote request, order status, reorder, or other' },
   { name: 'Extract', kind: 'LLM', does: 'Customer, ship-to, dates, lines, with confidence' },
@@ -33,6 +43,40 @@ const steps = [
   <p class="source">
     LLM steps: <code>poc/llm/</code> (Zod-validated tool output). Code steps: <code>poc/domain/</code> (pure functions, Vitest tests).
   </p>
+
+  <h2>How each run is scored</h2>
+  <div class="narration">
+    <p>
+      It's scored against an answer key - in real life, I've done some things where Claude produces the output in a CLI
+      environment for a SME to say pass/fail to each response, but since this is all faked data, I had Claude produce a 
+      scorecard method to simulate that process.
+    </p>
+    <p>
+      Every run is scored by <code>poc/score.ts</code> against <code>answer_key.json</code>. The key was written with
+      the emails, before any run. Four numbers come out:
+    </p>
+  </div>
+  <table class="metrics">
+    <thead><tr><th>Metric</th><th>Out of</th><th>Counts as a hit when</th></tr></thead>
+    <tbody>
+      <tr v-for="m in metrics" :key="m.name"><td>{{ m.name }}</td><td>{{ m.unit }}</td><td>{{ m.hit }}</td></tr>
+    </tbody>
+  </table>
+  <div class="narration">
+    <p>
+      Output lines are paired to key lines by SKU first, then in order. A key line with no output line to pair with
+      counts as a miss on both SKU and quantity. An output line with no key line is listed as an extra line.
+    </p>
+    <p>
+      Every miss is listed with a cause: misclassified, wrong SKU, wrong quantity or unit, line not extracted, missing
+      flag. Chapter 4 shows these for run 1.
+    </p>
+    <p>
+      Not scored: prices, plant choice, and the draft email. Prices and plants come from code, so they are right
+      whenever the SKU and quantity are right. Extra flags are listed but do not lower the score, so flag precision is
+      not measured.
+    </p>
+  </div>
 </template>
 
 <style scoped>
@@ -49,4 +93,7 @@ const steps = [
   .flow li:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -1.1rem; transform: none; }
   .flow li { margin-bottom: 0.5rem; }
 }
+.metrics { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1rem; font-size: 0.9rem; }
+.metrics th, .metrics td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.metrics th { color: var(--muted); font-weight: 600; }
 </style>

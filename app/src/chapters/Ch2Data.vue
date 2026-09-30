@@ -36,11 +36,8 @@ const sender = (from: string) => from.replace(/<.*>/, '').trim();
 
 <template>
   <div class="narration">
-    <p><i>
-      *NOTE: all references to "I" should be assumed to me and/or Claude (mostly Claude)
-    </i></p>
     <p>
-      I asked for what a portco would hand over on day one: ERP exports, the pricing sheet, and a week of quote emails.
+      I (I should generally be read to mean me and/or Claude - mostly Claude) asked for what a portco would hand over on day one: ERP exports, the pricing sheet, and a week of quote emails.
       Here I used fictional stand-ins. The exports keep NetSuite-style column names like “Item Number” and “Std. Cost”.
     </p>
     <p>

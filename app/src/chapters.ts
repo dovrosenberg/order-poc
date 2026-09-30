@@ -1,4 +1,5 @@
 import type { Component } from 'vue';
+import Ch0 from './chapters/Ch0Setup.vue';
 import Ch1 from './chapters/Ch1Problem.vue';
 import Ch2 from './chapters/Ch2Data.vue';
 import Ch3 from './chapters/Ch3Approach.vue';
@@ -9,8 +10,9 @@ import Ch7 from './chapters/Ch7Timeline.vue';
 import Ch8 from './chapters/Ch8TryIt.vue';
 
 export const CHAPTERS: { title: string; component: Component }[] = [
+  { title: 'The setup', component: Ch0 },
   { title: 'The problem', component: Ch1 },
-  { title: 'What I* asked for', component: Ch2 },
+  { title: 'What I asked for', component: Ch2 },
   { title: 'The approach', component: Ch3 },
   { title: 'Run 1', component: Ch4 },
   { title: 'What went wrong and what I changed', component: Ch5 },
