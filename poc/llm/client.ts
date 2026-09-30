@@ -33,14 +33,15 @@ export async function callTool<T>(opts: CallToolOpts<T>): Promise<{ parsed: T; r
     const res = await getClient().messages.create({
       model: MODEL,
       max_tokens: opts.maxTokens ?? 4096,
-      ...(opts.system ? { system: opts.system } : {}),
+      // Forced tool_choice ('tool'/'any') is rejected by this model, so use 'auto' plus an explicit instruction.
+      system: `${opts.system ? opts.system + '\n\n' : ''}Respond only by calling the ${toolName} tool exactly once.`,
       messages: [{ role: 'user', content: prompt }],
       tools: [{
         name: toolName,
         description: opts.toolDescription,
         input_schema: jsonSchema as Anthropic.Tool.InputSchema,
       }],
-      tool_choice: { type: 'tool', name: toolName },
+      tool_choice: { type: 'auto' },
     });
     raws.push(res);
     const block = res.content.find((b) => b.type === 'tool_use' && b.name === toolName);

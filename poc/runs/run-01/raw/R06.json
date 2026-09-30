@@ -1,0 +1,322 @@
+{
+  "record": {
+    "requestId": "R06",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "text": "PL-M8-20252 (20x25x2 MERV 8): 300 cases",
+        "qty": 300,
+        "unit": "CASE",
+        "sku": "PL-M8-20252",
+        "reason": "Exact SKU match; 20x25x2 MERV 8 pleated, case of 12."
+      },
+      {
+        "text": "PL-M13-24244 (24x24x4 MERV 13): 90 cases",
+        "qty": 90,
+        "unit": "CASE",
+        "sku": "PL-M13-24244",
+        "reason": "Exact SKU match; 24x24x4 MERV 13 pleated, case of 6."
+      },
+      {
+        "text": "PL-M8-16201 (16x20x1 MERV 8): 20 cases",
+        "qty": 20,
+        "unit": "CASE",
+        "sku": "PL-M8-16201",
+        "reason": "Exact SKU match; 16x20x1 MERV 8 pleated, case of 12."
+      }
+    ],
+    "flags": [
+      "short_stock"
+    ]
+  },
+  "steps": {
+    "classify": {
+      "result": "quote_request",
+      "reason": "The buyer asks for a quote, including pallet breaks and freight, on three pleated filter SKUs with specified case quantities for a Q4 purchase.",
+      "prompt": "Classify this inbound email to an air filter manufacturer's sales inbox.\n\nCategories:\n- quote_request: asks for pricing or a quote on new items.\n- order_status: asks about an existing order or shipment.\n- reorder: asks to repeat a previous order.\n- other: anything else.\n\nEmail:\n---\nFrom: Brenda Vogel <bvogel@greatplainsbs.example>\nSubject: Q4 pallet buy - pleated\nReceived: 2026-09-29T09:30:00-05:00\n\nHello,\n\nPutting together our Q4 pallet buy. Please quote:\n\n- PL-M8-20252 (20x25x2 MERV 8): 300 cases\n- PL-M13-24244 (24x24x4 MERV 13): 90 cases\n- PL-M8-16201 (16x20x1 MERV 8): 20 cases\n\nShip to Peoria DC, 6725 W Industrial Ave, Peoria IL 61604. Need everything by 10/16. Please show pallet breaks and freight.\n\nRegards,\nBrenda Vogel\nCategory Buyer - HVAC\nGreat Plains Building Supply\n309-555-0156\n---\n\nCall the tool with the category and a one-sentence reason.\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPCuTmqXLNyZwaVUS3P",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01GPouPuKNgmQ8aw7bdfFFGs",
+              "name": "record_classification",
+              "input": {
+                "classification": "quote_request",
+                "reason": "The buyer asks for a quote, including pallet breaks and freight, on three pleated filter SKUs with specified case quantities for a Q4 purchase."
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 844,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 123,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "extract": {
+      "result": {
+        "customerName": "Great Plains Building Supply",
+        "shipTo": "Peoria DC, 6725 W Industrial Ave, Peoria IL 61604",
+        "needBy": "2026-10-16",
+        "bidDueAt": null,
+        "targetUnitPrice": null,
+        "lines": [
+          {
+            "text": "PL-M8-20252 (20x25x2 MERV 8): 300 cases",
+            "qty": 300,
+            "unit": "CASE",
+            "confidence": 0.97
+          },
+          {
+            "text": "PL-M13-24244 (24x24x4 MERV 13): 90 cases",
+            "qty": 90,
+            "unit": "CASE",
+            "confidence": 0.97
+          },
+          {
+            "text": "PL-M8-16201 (16x20x1 MERV 8): 20 cases",
+            "qty": 20,
+            "unit": "CASE",
+            "confidence": 0.97
+          }
+        ],
+        "fieldConfidence": {
+          "customer": 0.9,
+          "shipTo": 0.95,
+          "needBy": 0.85
+        }
+      },
+      "prompt": "Extract the current request from this email. Ignore quoted earlier messages that are not the ask.\n\nRules:\n- One line per requested item. Set text to the line as written.\n- Copy qty and unit as written. Map units: case/cs -> CASE, each/ea/pcs -> EA, sq ft -> SF, linear ft/lin ft -> LF, rolls -> ROLL, pallets -> PALLET. Use null if a quantity or unit is not stated.\n- Do not convert units or do any math.\n- customerName, shipTo, needBy: use null if not stated.\n- bidDueAt: the bid or response due date and time as ISO 8601, if stated; otherwise null.\n- targetUnitPrice: only if the customer names a price they want; otherwise null.\n- Give each line a confidence from 0 to 1, and a confidence for customer, shipTo and needBy.\n\nEmail:\n---\nFrom: Brenda Vogel <bvogel@greatplainsbs.example>\nSubject: Q4 pallet buy - pleated\nReceived: 2026-09-29T09:30:00-05:00\n\nHello,\n\nPutting together our Q4 pallet buy. Please quote:\n\n- PL-M8-20252 (20x25x2 MERV 8): 300 cases\n- PL-M13-24244 (24x24x4 MERV 13): 90 cases\n- PL-M8-16201 (16x20x1 MERV 8): 20 cases\n\nShip to Peoria DC, 6725 W Industrial Ave, Peoria IL 61604. Need everything by 10/16. Please show pallet breaks and freight.\n\nRegards,\nBrenda Vogel\nCategory Buyer - HVAC\nGreat Plains Building Supply\n309-555-0156\n---\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPD4uYq4ybeBEhtgpEV",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01HVNZC2UdrpEjEncNCMnHsX",
+              "name": "record_extraction",
+              "input": {
+                "customerName": "Great Plains Building Supply",
+                "shipTo": "Peoria DC, 6725 W Industrial Ave, Peoria IL 61604",
+                "needBy": "2026-10-16",
+                "bidDueAt": null,
+                "targetUnitPrice": null,
+                "lines": [
+                  {
+                    "text": "PL-M8-20252 (20x25x2 MERV 8): 300 cases",
+                    "qty": 300,
+                    "unit": "CASE",
+                    "confidence": 0.97
+                  },
+                  {
+                    "text": "PL-M13-24244 (24x24x4 MERV 13): 90 cases",
+                    "qty": 90,
+                    "unit": "CASE",
+                    "confidence": 0.97
+                  },
+                  {
+                    "text": "PL-M8-16201 (16x20x1 MERV 8): 20 cases",
+                    "qty": 20,
+                    "unit": "CASE",
+                    "confidence": 0.97
+                  }
+                ],
+                "fieldConfidence": {
+                  "customer": 0.9,
+                  "shipTo": 0.95,
+                  "needBy": 0.85
+                }
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 1450,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 436,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "match": {
+      "result": [
+        {
+          "lineIndex": 0,
+          "sku": "PL-M8-20252",
+          "alternatives": [],
+          "confidence": 1,
+          "reason": "Exact SKU match; 20x25x2 MERV 8 pleated, case of 12.",
+          "substitution": false
+        },
+        {
+          "lineIndex": 1,
+          "sku": "PL-M13-24244",
+          "alternatives": [],
+          "confidence": 1,
+          "reason": "Exact SKU match; 24x24x4 MERV 13 pleated, case of 6.",
+          "substitution": false
+        },
+        {
+          "lineIndex": 2,
+          "sku": "PL-M8-16201",
+          "alternatives": [],
+          "confidence": 1,
+          "reason": "Exact SKU match; 16x20x1 MERV 8 pleated, case of 12.",
+          "substitution": false
+        }
+      ],
+      "prompt": "Match each requested line to a SKU in the catalog below.\n\nMethod:\n1. Look for an exact SKU or an alias first.\n2. Otherwise use the spec crosswalk, or nominal size + MERV + family.\n3. If the requested item is not made by this company, set sku to null. Put the nearest alternative SKU in alternatives. Set substitution to true only if you propose an alternative as the sku.\n4. Set confidence below 0.7 when the request is vague or several SKUs fit.\n5. Give a one-line reason.\n\nReturn exactly one match per line, with lineIndex equal to the line number. Use only SKUs from the catalog.\n\nCatalog (CSV):\nsku,name,family,merv,nominalSize,actualSize,sellUnit,unitsPerSell,specNotes\nPL-M8-16201,Pleated Panel Filter MERV 8 16x20x1,pleated,8,16x20x1,15.5x19.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-16251,Pleated Panel Filter MERV 8 16x25x1,pleated,8,16x25x1,15.5x24.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-20201,Pleated Panel Filter MERV 8 20x20x1,pleated,8,20x20x1,19.5x19.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-20251,Pleated Panel Filter MERV 8 20x25x1,pleated,8,20x25x1,19.5x24.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-16252,Pleated Panel Filter MERV 8 16x25x2,pleated,8,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-20252,Pleated Panel Filter MERV 8 20x25x2,pleated,8,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-24242,Pleated Panel Filter MERV 8 24x24x2,pleated,8,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-20202,Pleated Panel Filter MERV 8 20x20x2,pleated,8,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M11-16202,Pleated Panel Filter MERV 11 16x20x2,pleated,11,16x20x2,15.5x19.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-16252,Pleated Panel Filter MERV 11 16x25x2,pleated,11,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20202,Pleated Panel Filter MERV 11 20x20x2,pleated,11,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20252,Pleated Panel Filter MERV 11 20x25x2,pleated,11,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-24242,Pleated Panel Filter MERV 11 24x24x2,pleated,11,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20254,Pleated Panel Filter MERV 11 20x25x4,pleated,11,20x25x4,19.5x24.5x3.75,CASE,6 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 4\"\" depth\"\nPL-M11-24244,Pleated Panel Filter MERV 11 24x24x4,pleated,11,24x24x4,23.5x23.5x3.75,CASE,6 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 4\"\" depth\"\nPL-M13-16252,Pleated Panel Filter MERV 13 16x25x2,pleated,13,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-20202,Pleated Panel Filter MERV 13 20x20x2,pleated,13,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-20252,Pleated Panel Filter MERV 13 20x25x2,pleated,13,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-24242,Pleated Panel Filter MERV 13 24x24x2,pleated,13,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-16254,Pleated Panel Filter MERV 13 16x25x4,pleated,13,16x25x4,15.5x24.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-20204,Pleated Panel Filter MERV 13 20x20x4,pleated,13,20x20x4,19.5x19.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-20254,Pleated Panel Filter MERV 13 20x25x4,pleated,13,20x25x4,19.5x24.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-24244,Pleated Panel Filter MERV 13 24x24x4,pleated,13,24x24x4,23.5x23.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nBG-M13-2424-6P,Bag Filter MERV 13 6-Pocket 24x24x15,bag,13,24x24x15,23.375x23.375x15,EA,1 EA,MERV 13; 6 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-1224-6P,Bag Filter MERV 13 6-Pocket 12x24x15,bag,13,12x24x15,11.375x23.375x15,EA,1 EA,MERV 13; 6 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-2424-8P,Bag Filter MERV 13 8-Pocket 24x24x22,bag,13,24x24x22,23.375x23.375x22,EA,1 EA,MERV 13; 8 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-1224-8P,Bag Filter MERV 13 8-Pocket 12x24x22,bag,13,12x24x22,11.375x23.375x22,EA,1 EA,MERV 13; 8 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M14-2424-6P,Bag Filter MERV 14 6-Pocket 24x24x15,bag,14,24x24x15,23.375x23.375x15,EA,1 EA,MERV 14; 6 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-1224-6P,Bag Filter MERV 14 6-Pocket 12x24x15,bag,14,12x24x15,11.375x23.375x15,EA,1 EA,MERV 14; 6 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-2424-8P,Bag Filter MERV 14 8-Pocket 24x24x22,bag,14,24x24x22,23.375x23.375x22,EA,1 EA,MERV 14; 8 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-1224-8P,Bag Filter MERV 14 8-Pocket 12x24x22,bag,14,12x24x22,11.375x23.375x22,EA,1 EA,MERV 14; 8 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBX-M14-242412,Rigid Box Filter MERV 14 24x24x12,box,14,24x24x12,23.5x23.5x11.5,EA,1 EA,\"MERV 14; 90-95% ASHRAE dust spot; initial resistance 0.42 in. w.g. @ 500 fpm; single header, plastic frame\"\nBX-M14-122412,Rigid Box Filter MERV 14 12x24x12,box,14,12x24x12,11.5x23.5x11.5,EA,1 EA,\"MERV 14; 90-95% ASHRAE dust spot; initial resistance 0.42 in. w.g. @ 500 fpm; single header, plastic frame\"\nHP-9997-242412-G,HEPA Filter 99.97% 24x24x11.5 Galvanized Frame,hepa,,24x24x12,23.375x23.375x11.5,EA,1 EA,99.97% @ 0.3 micron; initial resistance 1.0 in. w.g. @ 250 fpm; galvanized steel frame; neoprene gasket\nHP-9997-242412-SG,HEPA Filter 99.97% 24x24x11.5 Stainless Gel-Seal,hepa,,24x24x12,23.375x23.375x11.5,EA,1 EA,99.97% @ 0.3 micron; initial resistance 1.0 in. w.g. @ 250 fpm; stainless steel frame; gel seal; for surgical/cleanroom terminal housings\nCB-M8-20252,Pleated Carbon Odor Filter 20x25x2,carbon,8,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 8; activated carbon impregnated pleated media, 200 g/SF carbon; initial resistance 0.30 in. w.g. @ 300 fpm\"\nCB-M8-24242,Pleated Carbon Odor Filter 24x24x2,carbon,8,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 8; activated carbon impregnated pleated media, 200 g/SF carbon; initial resistance 0.30 in. w.g. @ 300 fpm\"\nFR-GV-2424,Holding Frame Galvanized 24x24,frame,,24x24,23.75x23.75x4.75,EA,1 EA,\"16-ga galvanized steel; accepts 2\"\", 4\"\" and header filters with clips; universal holding frame\"\nFR-GV-1224,Holding Frame Galvanized 12x24,frame,,12x24,11.75x23.75x4.75,EA,1 EA,\"16-ga galvanized steel; accepts 2\"\", 4\"\" and header filters with clips; universal holding frame\"\nRM-M8-3090,\"Roll Media MERV 8 Synthetic 30\"\" x 90'\",media,8,30in x 90ft,30in x 90ft,ROLL,225 SF; 90 LF,\"MERV 8 synthetic polyester, 1\"\" loft, tackified; 225 SF per roll\"\nRM-M8-4590,\"Roll Media MERV 8 Synthetic 45\"\" x 90'\",media,8,45in x 90ft,45in x 90ft,ROLL,337.5 SF; 90 LF,\"MERV 8 synthetic polyester, 1\"\" loft, tackified; 337.5 SF per roll\"\n\nAliases (CSV):\nalias,sku,source\nCHT-RB14-2424,BX-M14-242412,plant2\nCHT-RB14-1224,BX-M14-122412,plant2\nCHT-CO-2025,CB-M8-20252,plant2\nCHT-CO-2424,CB-M8-24242,plant2\nCHT-HE-2424-G,HP-9997-242412-G,plant2\nCHT-HE-2424-SG,HP-9997-242412-SG,plant2\nCHT-BG14-2424-8,BG-M14-2424-8P,plant2\nCHT-BG14-1224-8,BG-M14-1224-8P,plant2\nCHT-BG14-2424-6,BG-M14-2424-6P,plant2\nCHT-BG14-1224-6,BG-M14-1224-6P,plant2\nCHT-BG13-2424-8,BG-M13-2424-8P,plant2\nCHT-BG13-1224-8,BG-M13-1224-8P,plant2\nCHT-BG13-2424-6,BG-M13-2424-6P,plant2\nCHT-BG13-1224-6,BG-M13-1224-6P,plant2\n400112,BX-M14-242412,plant2\n400113,BX-M14-122412,plant2\n410240,HP-9997-242412-G,plant2\n410241,HP-9997-242412-SG,plant2\n420250,CB-M8-20252,plant2\n420240,CB-M8-24242,plant2\n430288,BG-M14-2424-8P,plant2\nRNO-8-16201,PL-M8-16201,plant3\nRNO-8-16251,PL-M8-16251,plant3\nRNO-8-20201,PL-M8-20201,plant3\nRNO-8-20251,PL-M8-20251,plant3\nRNO-8-16252,PL-M8-16252,plant3\nRNO-8-20252,PL-M8-20252,plant3\nRNO-8-20202,PL-M8-20202,plant3\nRNO-8-24242,PL-M8-24242,plant3\nRNO-11-20252,PL-M11-20252,plant3\nRNO-11-24242,PL-M11-24242,plant3\nRNO-11-20254,PL-M11-20254,plant3\nRNO-11-24244,PL-M11-24244,plant3\nRNO-13-16252,PL-M13-16252,plant3\nRNO-13-20252,PL-M13-20252,plant3\nRNO-13-24242,PL-M13-24242,plant3\nRNO-13-20254,PL-M13-20254,plant3\nRNO-13-24244,PL-M13-24244,plant3\nRNO-MR30,RM-M8-3090,plant3\nRNO-MR45,RM-M8-4590,plant3\nM8 20x25x1,PL-M8-20251,customer\n2in MERV8 24x24,PL-M8-24242,customer\n6pk bag 24x24 M13,BG-M13-2424-6P,customer\n20x25x2 M8,PL-M8-20252,customer\n16x25x1 M8,PL-M8-16251,customer\nMERV8 16x20x1,PL-M8-16201,customer\n20x20x1 pleated,PL-M8-20201,customer\nM11 20x20x2,PL-M11-20202,customer\n24x24x2 MERV 11,PL-M11-24242,customer\n2in M13 16x25,PL-M13-16252,customer\n4in MERV13 20x25,PL-M13-20254,customer\nMERV 13 24x24x4,PL-M13-24244,customer\n8pk bag 24x24 M14,BG-M14-2424-8P,customer\n\nSpec crosswalk (CSV):\ncode,issuer,description,minMerv,filterType,acceptableSkus\nKRSD 23 41 00 / 2.2.A,school_district,\"2\"\" pleated prefilter, MERV 8 minimum\",8,pleated,PL-M8-16252; PL-M8-20252; PL-M8-24242; PL-M8-20202; PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nKRSD 23 41 00 / 2.2.B,school_district,\"4\"\" pleated final filter, MERV 13 minimum\",13,pleated,PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nKRSD 23 41 00 / 2.3.A,school_district,Galvanized holding frame,0,frame,FR-GV-2424; FR-GV-1224\nSBRMC 23 41 33 / 2.1.A,hospital,\"HEPA 99.97% @ 0.3 micron terminal filter, surgical suites\",16,hepa,HP-9997-242412-G; HP-9997-242412-SG\nSBRMC 23 41 00 / 2.2.C,hospital,\"MERV 14 final filter, bag or rigid box\",14,box,BX-M14-242412; BX-M14-122412; BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nSBRMC 23 41 00 / 2.1.A,hospital,\"2\"\" pleated prefilter ahead of final filter bank, MERV 8 minimum\",8,pleated,PL-M8-16252; PL-M8-20252; PL-M8-24242; PL-M8-20202; PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nPVRH 23 41 00 / 2.1.A,hospital,\"4\"\" pleated prefilter, MERV 13 minimum\",13,pleated,PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nPVRH 23 41 00 / 2.2.A,hospital,\"Bag final filter, MERV 14 minimum\",14,bag,BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nPVRH 23 41 33 / 2.1.B,hospital,\"HEPA 99.97% @ 0.3 micron, airborne isolation room exhaust\",16,hepa,HP-9997-242412-G; HP-9997-242412-SG\nLVUSD 23 41 00 / 2.1.A,school_district,\"1\"\" pleated return grille filter, MERV 8 minimum\",8,pleated,PL-M8-16201; PL-M8-16251; PL-M8-20201; PL-M8-20251\nLVUSD 23 41 00 / 2.1.B,school_district,\"2\"\" pleated classroom unit ventilator filter, MERV 11 minimum\",11,pleated,PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nLVUSD 23 41 00 / 2.2.A,school_district,\"Bag final filter for AHUs, MERV 13 minimum\",13,bag,BG-M13-2424-6P; BG-M13-1224-6P; BG-M13-2424-8P; BG-M13-1224-8P; BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nLVUSD 23 41 00 / 2.4.A,school_district,\"Kitchen hood makeup air odor filter, activated carbon pleated\",8,carbon,CB-M8-20252; CB-M8-24242\nCITY-WB 23 41 00 / 2.1.A,municipal,\"Synthetic roll media for makeup air units, MERV 8 minimum\",8,media,RM-M8-3090; RM-M8-4590\nCITY-WB 23 41 00 / 2.2.A,municipal,\"4\"\" pleated filter, MERV 11 minimum\",11,pleated,PL-M11-20254; PL-M11-24244; PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nCITY-WB 23 41 00 / 2.2.B,municipal,\"2\"\" pleated filter, public library, MERV 13 minimum\",13,pleated,PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nCITY-WB 23 41 00 / 2.3.A,municipal,\"Galvanized holding frame, 16-ga minimum\",0,frame,FR-GV-2424; FR-GV-1224\nCITY-WB 23 41 00 / 2.5.A,municipal,\"Activated carbon odor filter, wastewater plant admin building\",8,carbon,CB-M8-20252; CB-M8-24242\n\nLines:\n0: PL-M8-20252 (20x25x2 MERV 8): 300 cases (qty=300, unit=CASE)\n1: PL-M13-24244 (24x24x4 MERV 13): 90 cases (qty=90, unit=CASE)\n2: PL-M8-16201 (16x20x1 MERV 8): 20 cases (qty=20, unit=CASE)\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPDUh2LfsDaBEFae3yg",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01SUEq1NFtZv5onNsLhrkgP5",
+              "name": "record_matches",
+              "input": {
+                "matches": [
+                  {
+                    "lineIndex": 0,
+                    "sku": "PL-M8-20252",
+                    "alternatives": [],
+                    "confidence": 1,
+                    "reason": "Exact SKU match; 20x25x2 MERV 8 pleated, case of 12.",
+                    "substitution": false
+                  },
+                  {
+                    "lineIndex": 1,
+                    "sku": "PL-M13-24244",
+                    "alternatives": [],
+                    "confidence": 1,
+                    "reason": "Exact SKU match; 24x24x4 MERV 13 pleated, case of 6.",
+                    "substitution": false
+                  },
+                  {
+                    "lineIndex": 2,
+                    "sku": "PL-M8-16201",
+                    "alternatives": [],
+                    "confidence": 1,
+                    "reason": "Exact SKU match; 16x20x1 MERV 8 pleated, case of 12.",
+                    "substitution": false
+                  }
+                ]
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 8810,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 290,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "draft": {
+      "result": "Subject: Re: Q4 pallet buy - pleated\n\nHello Brenda,\n\nThank you for your quote request. Pricing for Great Plains Building Supply:\n\n- PL-M8-20252 (20x25x2 MERV 8): 300 cases at $41.64 per case = $12,492.00\n- PL-M13-24244 (24x24x4 MERV 13): 90 cases at $94.30 per case = $8,487.00\n- PL-M8-16201 (16x20x1 MERV 8): 20 cases at $25.79 per case = $515.80\n\nSubtotal: $21,494.80\nPallets: 16\nFreight: $0\nTotal: $21,494.80\n\nShip to: Peoria DC, 6725 W Industrial Ave, Peoria IL 61604.\n\nPlease note that this quote is flagged for short stock. I can't tell from this quote which line is affected or what quantity is available. We will confirm that with you before anything is final. I also can't confirm your 10/16 delivery date yet. The per-line pallet breaks you asked for are not included here, only the 16-pallet total.\n\nNorthfield Air Filtration Sales",
+      "prompt": "Write a short, plain reply email to this customer quote request.\n\nRules:\n- Use only the numbers in the facts below, exactly as given. Never calculate a new number.\n- If \"missing\" is not empty, ask only for those fields.\n- If flags include no_match, substitution or short_stock, say so plainly for the affected lines.\n- Do not invent lead times, terms or discounts.\n- Sign off as \"Northfield Air Filtration Sales\".\n\nOriginal email:\n---\nFrom: Brenda Vogel <bvogel@greatplainsbs.example>\nSubject: Q4 pallet buy - pleated\nReceived: 2026-09-29T09:30:00-05:00\n\nHello,\n\nPutting together our Q4 pallet buy. Please quote:\n\n- PL-M8-20252 (20x25x2 MERV 8): 300 cases\n- PL-M13-24244 (24x24x4 MERV 13): 90 cases\n- PL-M8-16201 (16x20x1 MERV 8): 20 cases\n\nShip to Peoria DC, 6725 W Industrial Ave, Peoria IL 61604. Need everything by 10/16. Please show pallet breaks and freight.\n\nRegards,\nBrenda Vogel\nCategory Buyer - HVAC\nGreat Plains Building Supply\n309-555-0156\n---\n\nFacts (JSON):\n{\n  \"customerName\": \"Great Plains Building Supply\",\n  \"lines\": [\n    {\n      \"text\": \"PL-M8-20252 (20x25x2 MERV 8): 300 cases\",\n      \"sku\": \"PL-M8-20252\",\n      \"sellQty\": 300,\n      \"sellUnit\": \"CASE\",\n      \"unitPrice\": 41.64,\n      \"extPrice\": 12492\n    },\n    {\n      \"text\": \"PL-M13-24244 (24x24x4 MERV 13): 90 cases\",\n      \"sku\": \"PL-M13-24244\",\n      \"sellQty\": 90,\n      \"sellUnit\": \"CASE\",\n      \"unitPrice\": 94.3,\n      \"extPrice\": 8487\n    },\n    {\n      \"text\": \"PL-M8-16201 (16x20x1 MERV 8): 20 cases\",\n      \"sku\": \"PL-M8-16201\",\n      \"sellQty\": 20,\n      \"sellUnit\": \"CASE\",\n      \"unitPrice\": 25.79,\n      \"extPrice\": 515.8\n    }\n  ],\n  \"totals\": {\n    \"subtotal\": 21494.8,\n    \"pallets\": 16,\n    \"volumeDiscount\": 0.08,\n    \"freight\": 0,\n    \"total\": 21494.8\n  },\n  \"flags\": [\n    \"short_stock\"\n  ],\n  \"missing\": []\n}\n",
+      "raw": {
+        "model": "claude-sonnet-5-5",
+        "id": "msg_011CfaPDfF2fU7DPBokFt3va",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "signature": "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"
+          },
+          {
+            "type": "text",
+            "text": "Subject: Re: Q4 pallet buy - pleated\n\nHello Brenda,\n\nThank you for your quote request. Pricing for Great Plains Building Supply:\n\n- PL-M8-20252 (20x25x2 MERV 8): 300 cases at $41.64 per case = $12,492.00\n- PL-M13-24244 (24x24x4 MERV 13): 90 cases at $94.30 per case = $8,487.00\n- PL-M8-16201 (16x20x1 MERV 8): 20 cases at $25.79 per case = $515.80\n\nSubtotal: $21,494.80\nPallets: 16\nFreight: $0\nTotal: $21,494.80\n\nShip to: Peoria DC, 6725 W Industrial Ave, Peoria IL 61604.\n\nPlease note that this quote is flagged for short stock. I can't tell from this quote which line is affected or what quantity is available. We will confirm that with you before anything is final. I also can't confirm your 10/16 delivery date yet. The per-line pallet breaks you asked for are not included here, only the 16-pallet total.\n\nNorthfield Air Filtration Sales"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 899,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 974,
+          "output_tokens_details": {
+            "thinking_tokens": 596
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      }
+    }
+  }
+}

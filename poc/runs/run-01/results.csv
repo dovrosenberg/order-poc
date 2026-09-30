@@ -1,0 +1,46 @@
+request_id,line,text,qty,unit,sku,confidence,sell_qty,sell_unit,plants,unit_price,ext_price,flags,reason
+R01,1,PL-M8-20251   qty 20 cases,20,CASE,PL-M8-20251,1.00,20,CASE,P1:20,32.45,649.00,,Exact SKU match: MERV 8 pleated 20x25x1.
+R01,2,PL-M11-20252  qty 10 cases,10,CASE,PL-M11-20252,1.00,10,CASE,P1:10,65.86,658.60,,Exact SKU match: MERV 11 pleated 20x25x2.
+R01,3,PL-M13-24242  qty 8 cases,8,CASE,PL-M13-24242,1.00,8,CASE,P1:8,93.82,750.56,,Exact SKU match: MERV 13 pleated 24x24x2.
+R01,4,BG-M13-2424-6P  qty 24 each,24,EA,BG-M13-2424-6P,1.00,24,EA,P1:24,30.23,725.52,,Exact SKU match: MERV 13 6-pocket bag 24x24x15.
+R02,1,"40 single filters, 20x25x2 MERV 13",40,EA,PL-M13-20252,0.93,4,CASE,P1:4,94.24,376.96,,"Exact nominal size 20x25x2 + MERV 13 pleated. Sold by the case of 12, so 40 EA is 3.33 cases and needs 4 cases (48 EA) or a partial-case decision."
+R02,2,"900 sq ft of the 45"" wide MERV 8 roll media (for the make up air units)",900,SF,RM-M8-4590,0.95,3,ROLL,P3:3,70.00,210.00,,"45"" wide MERV 8 synthetic roll media. At 337.5 SF per roll, 900 SF is 2.67 rolls, so order 3 rolls."
+R03,1,"1 | KRSD 23 41 00 / 2.2.A | Pleated prefilter, 2in | 20x25x2 | Min MERV 8 | 240 | EA",240,EA,PL-M8-20252,0.95,20,CASE,P1:20,46.15,923.00,,"Spec 2.2.A, 2in pleated 20x25x2 MERV 8 min; PL-M8-20252 is the exact size and lowest MERV in the acceptable list. Sold by the case of 12, so 240 EA = 20 cases."
+R03,2,"2 | KRSD 23 41 00 / 2.2.A | Pleated prefilter, 2in | 24x24x2 | Min MERV 8 | 120 | EA",120,EA,PL-M8-24242,0.95,10,CASE,P1:10,49.31,493.10,,"Spec 2.2.A, 2in pleated 24x24x2 MERV 8 min; PL-M8-24242 is the exact size and lowest MERV in the acceptable list. Sold by the case of 12, so 120 EA = 10 cases."
+R03,3,"3 | KRSD 23 41 00 / 2.2.B | Pleated final, 4in | 24x24x4 | Min MERV 13 | 60 | EA",60,EA,PL-M13-24244,0.97,10,CASE,P1:10,104.50,1045.00,,"Spec 2.2.B, 4in pleated 24x24x4 MERV 13 min; PL-M13-24244 is the only acceptable SKU at this size. Sold by the case of 6, so 60 EA = 10 cases."
+R03,4,"4 | KRSD 23 41 00 / 2.2.B | Pleated final, 4in | 20x25x4 | Min MERV 13 | 36 | EA",36,EA,PL-M13-20254,0.97,6,CASE,P1:6,97.81,586.86,,"Spec 2.2.B, 4in pleated 20x25x4 MERV 13 min; PL-M13-20254 is the only acceptable SKU at this size. Sold by the case of 6, so 36 EA = 6 cases."
+R03,5,"5 | KRSD 23 41 00 / 2.3.A | Holding frame, galvanized | 24x24 | -- | 20 | EA",20,EA,FR-GV-2424,0.96,20,EA,P1:20,20.48,409.60,,"Spec 2.3.A, galvanized holding frame 24x24; FR-GV-2424 is the exact size and is sold per each."
+R04,1,CHT-RB14-2424 - 16 ea,16,EA,BX-M14-242412,0.98,16,EA,P2:16,71.67,1146.72,,Exact alias CHT-RB14-2424 -> Rigid Box MERV 14 24x24x12
+R04,2,CHT-RB14-1224 - 8 ea,8,EA,BX-M14-122412,0.98,8,EA,P2:8,47.52,380.16,,Exact alias CHT-RB14-1224 -> Rigid Box MERV 14 12x24x12
+R04,3,CHT-CO-2025 - 6 cs,6,CASE,CB-M8-20252,0.98,6,CASE,P2:6,144.89,869.34,,Exact alias CHT-CO-2025 -> Pleated Carbon Odor Filter 20x25x2 (case)
+R04,4,CHT-HE-2424-G - 4 ea,4,EA,HP-9997-242412-G,0.98,4,EA,P2:4,247.72,990.88,short_stock,Exact alias CHT-HE-2424-G -> HEPA 99.97% galvanized frame
+R04,5,CHT-BG14-2424-8 - 24 ea,24,EA,BG-M14-2424-8P,0.98,24,EA,P2:24,43.00,1032.00,,Exact alias CHT-BG14-2424-8 -> Bag MERV 14 8-pocket 24x24x22
+R05,1,18 cases 16x25x1 MERV 8,18,CASE,PL-M8-16251,0.97,18,CASE,P3:18,31.69,570.42,,Nominal size 16x25x1 MERV 8 pleated matches PL-M8-16251 (customer alias '16x25x1 M8').
+R05,2,12 cases 20x20x2 MERV 11,12,CASE,PL-M11-20202,0.97,12,CASE,P3:12,64.32,771.84,,20x20x2 MERV 11 pleated matches PL-M11-20202 (customer alias 'M11 20x20x2').
+R05,3,30 each 12x24 6 pocket bags MERV 14,30,EA,BG-M14-1224-6P,0.97,30,EA,P1:30,24.13,723.90,,"12x24 6-pocket MERV 14 bag filter matches BG-M14-1224-6P on size, pocket count and MERV."
+R06,1,PL-M8-20252 (20x25x2 MERV 8): 300 cases,300,CASE,PL-M8-20252,1.00,300,CASE,P1:220;P3:80,41.64,12492.00,,"Exact SKU match; 20x25x2 MERV 8 pleated, case of 12."
+R06,2,PL-M13-24244 (24x24x4 MERV 13): 90 cases,90,CASE,PL-M13-24244,1.00,90,CASE,P1:50;P3:30;SHORT:10,94.30,8487.00,short_stock,"Exact SKU match; 24x24x4 MERV 13 pleated, case of 6."
+R06,3,PL-M8-16201 (16x20x1 MERV 8): 20 cases,20,CASE,PL-M8-16201,1.00,20,CASE,P1:20,25.79,515.80,,"Exact SKU match; 16x20x1 MERV 8 pleated, case of 12."
+R07,1,8 of the terminal HEPAs (24x24) - must meet SBRMC 23 41 33 / 2.1.A,8,,HP-9997-242412-SG,0.60,0,EA,,411.84,0.00,low_confidence,"Spec 2.1.A (surgical suites HEPA) allows both 24x24 HEPAs; the gel-seal stainless unit is the one noted for surgical terminal housings, but the frame and seal type isn't stated."
+R07,2,"8 of the finals (also 24x24) - final bank, SBRMC 23 41 00 / 2.2.C",8,,BX-M14-242412,0.35,0,EA,,80.96,0.00,low_confidence,"Spec 2.2.C accepts MERV 14 24x24 rigid box, 6-pocket bag or 8-pocket bag; the request doesn't say which type, so the pick is a guess."
+R08,1,M8 20x25x1 - 10 cases,10,CASE,PL-M8-20251,0.98,10,CASE,P3:10,34.83,348.30,,Exact customer alias 'M8 20x25x1' maps to PL-M8-20251 (case of 12).
+R08,2,2in MERV8 24x24 - 6 cases,6,CASE,PL-M8-24242,0.98,6,CASE,P3:6,50.35,302.10,,Exact customer alias '2in MERV8 24x24' maps to PL-M8-24242 (case of 12).
+R09,1,24x24x1 MERV 8 pleated - 24 each,24,EA,,0.60,0,,,0.00,0.00,low_confidence;no_match,"No 24x24x1 pleated filter is in the catalog. The nearest is the 24x24x2 MERV 8, which has a different depth, so I am not substituting it."
+R09,2,20x25x4 MERV 16 pleated - 12 each (tenant is asking for MERV 16 for the 3rd floor),12,EA,,0.60,0,,,0.00,0.00,low_confidence;no_match,"No pleated filter above MERV 13 is made. The 20x25x4 MERV 13 is the closest, and the MERV 16 request would need HEPA, which is a different product."
+R11,1,30 cases of the 20x25x2 MERV 13 (PL-M13-20252),30,CASE,PL-M13-20252,1.00,30,CASE,P3:30,104.88,3146.40,,"Exact SKU PL-M13-20252 (MERV 13 20x25x2 pleated, case of 12) matches the request."
+R12,1,"AHU-1 prefilter: 2"" pleated MERV 8, 20x25x2",12,,PL-M8-20252,0.97,0,CASE,,48.58,0.00,,"Exact nominal size, MERV 8, 2"" pleated."
+R12,2,AHU-1 final filter: RNO-13-20252,12,,PL-M13-20252,0.98,0,CASE,,97.15,0.00,,Plant3 alias RNO-13-20252 maps to PL-M13-20252.
+R12,3,AHU-2 prefilter: RNO-8-16251,16,,PL-M8-16251,0.98,0,CASE,,32.67,0.00,,Plant3 alias RNO-8-16251 maps to PL-M8-16251.
+R12,4,"AHU-2 final filter: 4"" pleated MERV 13, 24x24x4",6,,PL-M13-24244,0.97,0,CASE,,110.00,0.00,,Exact match MERV 13 24x24x4 pleated.
+R12,5,"AHU-3 prefilter: 2"" pleated MERV 8, 24x24x2",9,,PL-M8-24242,0.97,0,CASE,,51.90,0.00,,Exact match MERV 8 24x24x2 pleated.
+R12,6,"AHU-3 final filter: Bag MERV 14, 8 pocket, 24x24",9,,BG-M14-2424-8P,0.90,0,EA,,48.58,0.00,,"MERV 14 8-pocket bag 24x24 (22"" depth implied by 8-pocket); only 24x24 8P option."
+R12,7,"AHU-4 prefilter: 2"" pleated MERV 8, 18x24x2 (odd size - customer asks what we can do)",8,,,0.85,0,,,0.00,0.00,no_match,"18x24x2 is not a size we make; nearest 2"" MERV 8 sizes offered as alternatives but not proposed."
+R12,8,"AHU-4 final filter: 4"" pleated MERV 13, 20x20x4",8,,PL-M13-20204,0.97,0,CASE,,93.69,0.00,,Exact match MERV 13 20x20x4 pleated.
+R12,9,"AHU-5 prefilter: 2"" pleated MERV 8, 20x25x2",6,,PL-M8-20252,0.97,0,CASE,,48.58,0.00,,"Exact nominal size, MERV 8, 2"" pleated."
+R12,10,"AHU-5 final filter: 4"" pleated MERV 11, 20x25x4",6,,PL-M11-20254,0.97,0,CASE,,72.86,0.00,,Exact match MERV 11 20x25x4 pleated.
+R12,11,"AHU-6 prefilter: 2"" pleated MERV 8, 16x25x2",10,,PL-M8-16252,0.97,0,CASE,,44.20,0.00,,Exact match MERV 8 16x25x2 pleated.
+R12,12,"AHU-6 final filter: 4"" pleated MERV 13, 16x25x4",10,,PL-M13-16254,0.97,0,CASE,,93.69,0.00,,Exact match MERV 13 16x25x4 pleated.
+R12,13,"AHU-7 prefilter: RNO-MR30 roll media, cut to fit",400,LF,RM-M8-3090,0.90,5,ROLL,P3:5,51.04,255.20,,"Plant3 alias RNO-MR30 maps to 30""x90' roll; 400 LF is ~4.4 rolls (sold by roll)."
+R12,14,AHU-7 final filter: RNO-13-20252,12,,PL-M13-20252,0.98,0,CASE,,97.15,0.00,,Plant3 alias RNO-13-20252 maps to PL-M13-20252.
+R12,15,"AHU-8 prefilter: 2"" pleated MERV 8, 24x24x2",4,,PL-M8-24242,0.97,0,CASE,,51.90,0.00,,Exact match MERV 8 24x24x2 pleated.
+R12,16,"AHU-8 final filter: Rigid box MERV 14, 24x24x12",4,,BX-M14-242412,0.98,0,EA,,80.96,0.00,,Exact match rigid box MERV 14 24x24x12.
