@@ -271,7 +271,6 @@ The app is a guided, step-by-step replay of the Phase 1 half hour, the way you'd
 6. **Run 2.** The same table and scorecard, with a side-by-side comparison against run 1 and the remaining misses stated plainly.
 7. **The timeline.** The `LOG.md` entries on a timeline from minute 0 to minute 30, so the time box is visible.
 8. **Try it.** Pick any sample email and step through its six outputs: classification, extracted fields with confidence, matches with reasons, the priced line table, flags, and the draft reply. Changing a SKU or quantity re-runs the math instantly using `poc/domain/`. With a passcode, a pasted new email runs live; offer the emails in `poc/data/sample_emails.json` as one-click copy-paste samples.
-9. **What production would take.** A short list: email ingestion, NetSuite integration, a larger evaluation set from historical quotes, retrieval at real catalog size, audit logging, hosting in the portco's tenant, and a rough effort estimate.
 
 A header shows the passcode status and an "Unlock live mode" button. The design is clean and quiet; the content carries it.
 
@@ -283,7 +282,7 @@ A header shows the passcode status and an "Unlock live mode" button. The design 
 2. **What I did in 30 minutes:** the six steps, the two runs, and the scorecard change, stated in real numbers.
 3. **Design choices:** LLM for language, code for math; confidence and flags instead of silent guesses; scored against an answer key, not eyeballed.
 4. **What it proved and what it didn't:** it works on messy synthetic input; real accuracy is unknown until it's run against 100+ historical requests.
-5. **Path to production:** the same list as chapter 9 of the app.
+5. **Path to production:** email ingestion, NetSuite integration, a larger evaluation set from historical quotes, retrieval at real catalog size, audit logging, hosting in the portco's tenant, and a rough effort estimate.
 6. **Build note, stated honestly:** Phase 1 took N minutes (from `LOG.md`); the walkthrough app was built afterward to explain it. All data is fictional.
 
 Then link to poc/README.md for running the POC locally, and add setup steps: `npm install`, `npm run poc` (runs Phase 1 and writes a new run folder), `npm run dev`, and deployment.
@@ -296,7 +295,7 @@ Then link to poc/README.md for running the POC locally, and add setup steps: `np
 - [ ] At least two run folders exist, each with results, scorecard, prompts, and raw outputs.
 - [ ] Scorecards compute every metric against `answer_key.json`, and every miss is listed with its cause.
 - [ ] Every dollar figure traces to catalog, pricing, and inventory data; the LLM produces no numbers.
-- [ ] The walkthrough shows all nine chapters without a passcode, and every number comes from committed run files.
+- [ ] The walkthrough shows all eight chapters without a passcode, and every number comes from committed run files.
 - [ ] In the try-it step, editing a SKU or quantity instantly updates price, stock, and flags, using the same domain code as Phase 1.
 - [ ] A `?code=` link unlocks live mode, and a pasted new email runs end to end through the proxy.
 - [ ] The API key never appears in the client bundle, network responses, or browser storage; `api/llm` returns 401 without a valid passcode and 400 for unknown steps or oversized input.

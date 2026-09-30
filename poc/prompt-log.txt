@@ -23,10 +23,10 @@ This step would look very different in a real-world scenario since it would be a
 
 6:02pm (it was waiting for the API key; I created .env file and added it): ❯ i added .env file
 
-6:04pm (I was out of credits and had to reload): ❯ try again
+6:04pm (credit error at 6:02; I reloaded credits): ❯ try again
 
 6:09pm (it finished the first run and produced a scorecard): ❯ Group the misses by cause, propose the smallest fixes, apply them, log them,
   and do run 2.
 
-POC FINISHED AT 6:14pm
+POC FINISHED AT 6:13pm
   
