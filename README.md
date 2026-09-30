@@ -70,7 +70,7 @@ The reviewer's questions are data egress and approved tooling. The answers:
 
 ## Deploy (Vercel)
 
-1. Push to GitHub. In Vercel, import the repo with the root directory left as the repo root. `vercel.json` sets the install and build commands, the output directory `app/dist`, and the `api/llm.ts` function.
+1. Push to GitHub. In Vercel, import the repo with the root directory left as the repo root. `vercel.json` sets the install and build commands, the output directory `dist` (a copy of `app/dist`), and the `api/llm.ts` function.
 2. In Anthropic Console, create a workspace with a monthly spend limit and create a key in it.
 3. In Vercel project settings, set `ANTHROPIC_API_KEY` and `DEMO_PASSCODE`. Optionally set `MODEL` (default `claude-sonnet-5-5`). Deploy.
 4. Check the deployment:

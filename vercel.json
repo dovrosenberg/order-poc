@@ -3,7 +3,7 @@
   "framework": "vite",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "outputDirectory": "app/dist",
+  "outputDirectory": "dist",
   "functions": {
     "api/llm.ts": {
       "includeFiles": "poc/{prompts/v2,data}/**",
