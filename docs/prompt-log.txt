@@ -1,0 +1,32 @@
+This is the developer's log tracking the Claude Code interactions while building the POC section.  
+
+This step would look very different in a real-world scenario since it would be about getting and understanding the structure of actual available documents
+5:48pm: ❯ Read docs/SPEC.md "Simulated data". First create poc/domain/types.ts and
+  poc/data/products.csv yourself. Then use parallel subagents to generate
+  aliases.csv, spec_crosswalk.csv, customers.csv + pricing.json, inventory.csv,
+  and requests.json + answer_key.json, all consistent with products.csv.
+  When they finish, validate cross-references (every SKU exists, every email's
+  answer key matches its scenario) and fix any mismatches. Commit.
+
+5:53pm (in parallel session after types.ts was created): ❯ Read CLAUDE.md and docs/SPEC.md "Phase 1" and "Repo layout". Plan Phase 1
+  only: the minimum that meets acceptance items 1-4. No UI, no extras.
+  Structure the work so poc/domain/ (with tests) and poc/llm/ can be built by
+  parallel subagents against the existing types.ts, then run.ts and score.ts.
+  
+5:55pm (after data creation session finished) ❯ update the spec to tell phase 2 where the live mode samples are
+
+5:57pm (after plan creation complete): ❯ Execute the plan. Build poc/domain/ and poc/llm/ in parallel subagents, then
+  wire run.ts and score.ts. Log each milestone to poc/LOG.md with the time and
+  commit. Then run it, show me the scorecard, and stop.
+
+<while this was running I created Claude Code workspace and API key... it finished before I did>
+
+6:02pm (it was waiting for the API key; I created .env file and added it): ❯ i added .env file
+
+6:04pm (I was out of credits and had to reload): ❯ try again
+
+6:09pm (it finished the first run and produced a scorecard): ❯ Group the misses by cause, propose the smallest fixes, apply them, log them,
+  and do run 2.
+
+POC FINISHED AT 6:14pm
+  
