@@ -69,6 +69,7 @@ async function runLive() {
       v.matches = lines.length ? await step('match', () => live.match(lines)) : [];
     }
     liveView.value = v;
+    reset(); // the key watcher runs after this tick; redraft needs the line table now
     if (v.ex) await redraft();
   } catch (e) {
     liveError.value = e instanceof LiveError && e.status === 401

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { join } from 'node:path';
-import { loadAnswerKey, loadMasterData, loadRequests } from './load';
+import { loadAnswerKey, loadMasterData, loadRequests } from './load.js';
 
 const dir = join(import.meta.dirname, 'data');
 

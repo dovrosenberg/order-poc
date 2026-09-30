@@ -1,7 +1,7 @@
-import type { Alias, ExtractedLine, LineMatch, Product, SpecItem } from '../domain/types';
-import { callTool } from './client';
-import { loadPrompt } from './prompts';
-import { MatchesSchema } from './schemas';
+import type { Alias, ExtractedLine, LineMatch, Product, SpecItem } from '../domain/types.js';
+import { callTool } from './client.js';
+import { loadPrompt } from './prompts.js';
+import { MatchesSchema } from './schemas.js';
 
 const q = (s: string | number | undefined) => {
   const v = String(s ?? '');

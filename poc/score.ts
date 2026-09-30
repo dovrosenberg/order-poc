@@ -1,8 +1,8 @@
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { AnswerKeyEntry, Classification, Flag, Unit } from './domain/types';
-import { loadAnswerKey } from './load';
+import type { AnswerKeyEntry, Classification, Flag, Unit } from './domain/types.js';
+import { loadAnswerKey } from './load.js';
 
 // Shape of the parsed part of runs/run-NN/raw/<id>.json that scoring needs.
 export interface ScoredLine { text: string; qty: number | null; unit: Unit | null; sku: string | null; reason: string; }

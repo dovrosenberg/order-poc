@@ -1,7 +1,7 @@
-import type { Flag, InboundRequest } from '../domain/types';
-import { callText } from './client';
-import { emailText } from './classify';
-import { loadPrompt } from './prompts';
+import type { Flag, InboundRequest } from '../domain/types.js';
+import { callText } from './client.js';
+import { emailText } from './classify.js';
+import { loadPrompt } from './prompts.js';
 
 export interface DraftInput {
   email: InboundRequest;

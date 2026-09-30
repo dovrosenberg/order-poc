@@ -9,5 +9,5 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["vite.config.ts", "phase1.ts", "dev-api.ts", "*.test.ts", "src/**/*.test.ts", "src/phase1-types.ts", "src/lib/*.ts", "src/env.d.ts"]
+  "include": ["*.ts"]
 }

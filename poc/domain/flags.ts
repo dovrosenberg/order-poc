@@ -1,4 +1,4 @@
-import type { Extraction, Flag, LineMatch, PricedLine } from './types';
+import type { Extraction, Flag, LineMatch, PricedLine } from './types.js';
 
 const ORDER: Flag[] = [
   'missing_info', 'low_confidence', 'no_match', 'substitution', 'short_stock', 'bid_deadline', 'below_floor',

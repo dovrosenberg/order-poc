@@ -282,8 +282,7 @@ A header shows the passcode status and an "Unlock live mode" button. The design 
 2. **What I did in 30 minutes:** the six steps, the two runs, and the scorecard change, stated in real numbers.
 3. **Design choices:** LLM for language, code for math; confidence and flags instead of silent guesses; scored against an answer key, not eyeballed.
 4. **What it proved and what it didn't:** it works on messy synthetic input; real accuracy is unknown until it's run against 100+ historical requests.
-5. **Path to production:** email ingestion, NetSuite integration, a larger evaluation set from historical quotes, retrieval at real catalog size, audit logging, hosting in the portco's tenant, and a rough effort estimate.
-6. **Build note, stated honestly:** Phase 1 took N minutes (from `LOG.md`); the walkthrough app was built afterward to explain it. All data is fictional.
+5. **Build note, stated honestly:** Phase 1 took N minutes (from `LOG.md`); the walkthrough app was built afterward to explain it. All data is fictional.
 
 Then link to poc/README.md for running the POC locally, and add setup steps: `npm install`, `npm run poc` (runs Phase 1 and writes a new run folder), `npm run dev`, and deployment.
 

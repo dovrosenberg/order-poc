@@ -1,12 +1,12 @@
-import './env';
+import './env.js';
 import { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { Classification, Customer, Extraction, Flag, LineMatch, PricedLine, InboundRequest } from './domain/types';
-import { toSellQty, allocate, homePlantFor, priceLines, floorPrice, lineFlags, quoteFlags } from './domain';
-import { classify, extract, match, draft, MODEL } from './llm';
-import { loadMasterData, loadRequests } from './load';
-import { scoreRun, type RequestRecord } from './score';
+import type { Classification, Customer, Extraction, Flag, LineMatch, PricedLine, InboundRequest } from './domain/types.js';
+import { toSellQty, allocate, homePlantFor, priceLines, floorPrice, lineFlags, quoteFlags } from './domain/index.js';
+import { classify, extract, match, draft, MODEL } from './llm/index.js';
+import { loadMasterData, loadRequests } from './load.js';
+import { scoreRun, type RequestRecord } from './score.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const arg = (name: string) => { const i = process.argv.indexOf(`--${name}`); return i > 0 ? process.argv[i + 1] : undefined; };

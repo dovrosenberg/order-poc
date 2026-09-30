@@ -1,4 +1,4 @@
-import type { Allocation, InventoryRow, Plant, Region } from './types';
+import type { Allocation, InventoryRow, Plant, Region } from './types.js';
 
 export function homePlantFor(region: Region): Plant {
   switch (region) {

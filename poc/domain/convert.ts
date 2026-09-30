@@ -1,4 +1,4 @@
-import type { Product, Unit } from './types';
+import type { Product, Unit } from './types.js';
 
 export function toSellQty(p: Product, qty: number, unit: Unit): number {
   if (unit === p.sellUnit) return qty;

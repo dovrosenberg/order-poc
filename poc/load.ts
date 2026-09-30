@@ -4,7 +4,7 @@ import { parse } from 'csv-parse/sync';
 import type {
   Alias, AnswerKeyEntry, Customer, Family, InboundRequest, InventoryRow, MasterData, Plant, Pricing,
   Product, Region, SpecItem, Tier, Unit,
-} from './domain/types';
+} from './domain/types.js';
 
 type Row = Record<string, string>;
 

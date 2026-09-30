@@ -1,4 +1,4 @@
-import type { Customer, Pricing, Product, QuoteTotals } from './types';
+import type { Customer, Pricing, Product, QuoteTotals } from './types.js';
 
 const round2 = (n: number): number => Math.round((n + Number.EPSILON) * 100) / 100;
 

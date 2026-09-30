@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { Classification, Extraction, LineMatch, Unit } from '../domain/types';
+import type { Classification, Extraction, LineMatch, Unit } from '../domain/types.js';
 
 export const UnitSchema = z.enum(['EA', 'CASE', 'ROLL', 'SF', 'LF', 'PALLET']);
 

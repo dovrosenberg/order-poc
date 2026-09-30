@@ -1,0 +1,14 @@
+{
+  "name": "naf-rfq-to-quote",
+  "private": true,
+  "type": "module",
+  "workspaces": ["poc", "app"],
+  "scripts": {
+    "poc": "npm start -w poc -- --prompts v2",
+    "dev": "npm run dev -w app",
+    "build": "npm run build -w app",
+    "test": "npm test -w poc && npm test -w app && npm run test:api",
+    "test:api": "vitest run --root api",
+    "typecheck": "npm run typecheck -w poc && npm run typecheck -w app && tsc -p api"
+  }
+}

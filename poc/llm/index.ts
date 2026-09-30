@@ -1,7 +1,7 @@
-export * from './client';
-export * from './prompts';
-export * from './schemas';
-export { classify, emailText } from './classify';
-export { extract } from './extract';
-export { match } from './match';
-export { draft, type DraftInput } from './draft';
+export * from './client.js';
+export * from './prompts.js';
+export * from './schemas.js';
+export { classify, emailText } from './classify.js';
+export { extract } from './extract.js';
+export { match } from './match.js';
+export { draft, type DraftInput } from './draft.js';

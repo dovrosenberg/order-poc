@@ -1,7 +1,7 @@
-import type { Classification, InboundRequest } from '../domain/types';
-import { callTool } from './client';
-import { loadPrompt } from './prompts';
-import { ClassificationSchema } from './schemas';
+import type { Classification, InboundRequest } from '../domain/types.js';
+import { callTool } from './client.js';
+import { loadPrompt } from './prompts.js';
+import { ClassificationSchema } from './schemas.js';
 
 /** Email text sent to the model. Never includes scenarioNote. */
 export function emailText(e: InboundRequest): string {

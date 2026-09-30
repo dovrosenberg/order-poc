@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import type { Customer, Extraction, InventoryRow, LineMatch, Pricing, PricedLine, Product } from './types';
-import { toSellQty } from './convert';
-import { allocate, homePlantFor } from './inventory';
-import { floorPrice, priceLines } from './pricing';
-import { lineFlags, quoteFlags } from './flags';
+import type { Customer, Extraction, InventoryRow, LineMatch, Pricing, PricedLine, Product } from './types.js';
+import { toSellQty } from './convert.js';
+import { allocate, homePlantFor } from './inventory.js';
+import { floorPrice, priceLines } from './pricing.js';
+import { lineFlags, quoteFlags } from './flags.js';
 
 const prod = (o: Partial<Product>): Product => ({
   sku: 'X', name: 'x', family: 'pleated', sellUnit: 'CASE', unitsPerSell: [{ unit: 'EA', qty: 12 }],
