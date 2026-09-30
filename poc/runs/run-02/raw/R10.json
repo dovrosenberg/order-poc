@@ -1,0 +1,57 @@
+{
+  "record": {
+    "requestId": "R10",
+    "classification": "order_status",
+    "lines": [],
+    "flags": []
+  },
+  "steps": {
+    "classify": {
+      "result": "order_status",
+      "reason": "The customer is asking when their existing sales order SO 58213 (PO HPM-7731) will ship, because it is late and they haven't received tracking.",
+      "prompt": "Classify this inbound email to an air filter manufacturer's sales inbox.\n\nCategories:\n- quote_request: asks for pricing or a quote on new items.\n- order_status: asks about an existing order or shipment.\n- reorder: asks to repeat a previous order.\n- other: anything else.\n\nEmail:\n---\nFrom: Denise Walker <dwalker@harborviewpm.example>\nSubject: Where is SO 58213??\nReceived: 2026-09-30T10:12:00-04:00\n\nHi,\n\nChecking on our sales order SO 58213 (our PO HPM-7731) for the Q4 changeouts. It was supposed to ship last Thursday and we haven't gotten tracking. Techs are scheduled at the Norcross properties Monday. Can someone tell me when it's going to ship?\n\nThanks,\nDenise Walker\nProperty Operations\nHarborview Property Management\n770-555-0127\n---\n\nCall the tool with the category and a one-sentence reason.\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPgxpxawoPBrpRhGGFS",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01Eb8ykz5Y8UthhhCWbg1pWX",
+              "name": "record_classification",
+              "input": {
+                "classification": "order_status",
+                "reason": "The customer is asking when their existing sales order SO 58213 (PO HPM-7731) will ship, because it is late and they haven't received tracking."
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 759,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 119,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    }
+  }
+}

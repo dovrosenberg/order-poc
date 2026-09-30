@@ -1,0 +1,303 @@
+{
+  "record": {
+    "requestId": "R07",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "text": "8 of the terminal HEPAs (24x24) - must meet SBRMC 23 41 33 / 2.1.A",
+        "qty": 8,
+        "unit": "EA",
+        "sku": "HP-9997-242412-SG",
+        "reason": "Spec SBRMC 23 41 33 / 2.1.A accepts both 24x24 HEPAs; the gel-seal is listed for surgical terminal housings, but the galvanized unit also complies."
+      },
+      {
+        "text": "8 of the finals (also 24x24) - final bank, SBRMC 23 41 00 / 2.2.C",
+        "qty": 8,
+        "unit": "EA",
+        "sku": "BX-M14-242412",
+        "reason": "Spec SBRMC 23 41 00 / 2.2.C allows a MERV 14 24x24 rigid box, 6-pocket bag or 8-pocket bag. The request doesn't say which, so the rigid box is a guess."
+      }
+    ],
+    "flags": [
+      "low_confidence",
+      "short_stock"
+    ]
+  },
+  "steps": {
+    "classify": {
+      "result": "quote_request",
+      "reason": "The sender asks the manufacturer to recommend and quote new filters (terminal HEPAs and finals, 24x24) for a hospital OR air handler, with spec references and a delivery date, so this is a request for pricing on new items.",
+      "prompt": "Classify this inbound email to an air filter manufacturer's sales inbox.\n\nCategories:\n- quote_request: asks for pricing or a quote on new items.\n- order_status: asks about an existing order or shipment.\n- reorder: asks to repeat a previous order.\n- other: anything else.\n\nEmail:\n---\nFrom: Cheryl Ambrose <cambrose@stbrendanmed.example>\nSubject: Filters for OR 4 air handler\nReceived: 2026-09-30T08:05:00-05:00\n\nHello,\n\nFacilities is replacing filters on the air handler serving OR 4 and OR 5. Could you recommend and quote the best filters for a hospital operating room air handler? Our engineer says the terminal filters need to meet SBRMC 23 41 33 / 2.1.A and the final bank is SBRMC 23 41 00 / 2.2.C.\n\nI think it's 8 of the terminal HEPAs (24x24) and 8 of the finals (also 24x24) but I'm not 100% sure, maintenance is double-checking.\n\nDeliver to Central Receiving, 900 Medical Center Dr, Huntsville AL 35801 by 10/16.\n\nThank you,\nCheryl Ambrose\nFacilities Bid Desk\nSt. Brendan Regional Medical Center\n256-555-0104\n---\n\nCall the tool with the category and a one-sentence reason.\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPd1XJw7nW9z6TgcRgp",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_015T5QzXAe6AgiM9CTbxxwn8",
+              "name": "record_classification",
+              "input": {
+                "classification": "quote_request",
+                "reason": "The sender asks the manufacturer to recommend and quote new filters (terminal HEPAs and finals, 24x24) for a hospital OR air handler, with spec references and a delivery date, so this is a request for pricing on new items."
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 901,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 147,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "extract": {
+      "result": {
+        "customerName": "St. Brendan Regional Medical Center",
+        "shipTo": "Central Receiving, 900 Medical Center Dr, Huntsville AL 35801",
+        "needBy": "2026-10-16",
+        "bidDueAt": null,
+        "targetUnitPrice": null,
+        "lines": [
+          {
+            "text": "8 of the terminal HEPAs (24x24) - must meet SBRMC 23 41 33 / 2.1.A",
+            "qty": 8,
+            "unit": "EA",
+            "confidence": 0.6
+          },
+          {
+            "text": "8 of the finals (also 24x24) - final bank, SBRMC 23 41 00 / 2.2.C",
+            "qty": 8,
+            "unit": "EA",
+            "confidence": 0.6
+          }
+        ],
+        "fieldConfidence": {
+          "customer": 0.95,
+          "shipTo": 0.95,
+          "needBy": 0.85
+        }
+      },
+      "prompt": "Extract the current request from this email. Ignore quoted earlier messages that are not the ask.\n\nRules:\n- One line per requested item. Set text to the line as written.\n- Copy qty and unit as written. Map units: case/cs -> CASE, each/ea/pcs -> EA, sq ft -> SF, linear ft/lin ft -> LF, rolls -> ROLL, pallets -> PALLET. A count of filters with no unit stated (\"8 of the HEPAs\", a quantity column in an equipment schedule) is EA. Use null only if no quantity is stated at all.\n- Do not convert units or do any math.\n- customerName, shipTo, needBy: use null if not stated.\n- bidDueAt: the bid or response due date and time as ISO 8601, if stated; otherwise null.\n- targetUnitPrice: only if the customer names a price they want; otherwise null.\n- Give each line a confidence from 0 to 1, and a confidence for customer, shipTo and needBy.\n\nEmail:\n---\nFrom: Cheryl Ambrose <cambrose@stbrendanmed.example>\nSubject: Filters for OR 4 air handler\nReceived: 2026-09-30T08:05:00-05:00\n\nHello,\n\nFacilities is replacing filters on the air handler serving OR 4 and OR 5. Could you recommend and quote the best filters for a hospital operating room air handler? Our engineer says the terminal filters need to meet SBRMC 23 41 33 / 2.1.A and the final bank is SBRMC 23 41 00 / 2.2.C.\n\nI think it's 8 of the terminal HEPAs (24x24) and 8 of the finals (also 24x24) but I'm not 100% sure, maintenance is double-checking.\n\nDeliver to Central Receiving, 900 Medical Center Dr, Huntsville AL 35801 by 10/16.\n\nThank you,\nCheryl Ambrose\nFacilities Bid Desk\nSt. Brendan Regional Medical Center\n256-555-0104\n---\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPdF68rGeKiJjir7YNN",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01KwBGwmJ1yNPWL9Q3edSRG3",
+              "name": "record_extraction",
+              "input": {
+                "customerName": "St. Brendan Regional Medical Center",
+                "shipTo": "Central Receiving, 900 Medical Center Dr, Huntsville AL 35801",
+                "needBy": "2026-10-16",
+                "bidDueAt": null,
+                "targetUnitPrice": null,
+                "lines": [
+                  {
+                    "text": "8 of the terminal HEPAs (24x24) - must meet SBRMC 23 41 33 / 2.1.A",
+                    "qty": 8,
+                    "unit": "EA",
+                    "confidence": 0.6
+                  },
+                  {
+                    "text": "8 of the finals (also 24x24) - final bank, SBRMC 23 41 00 / 2.2.C",
+                    "qty": 8,
+                    "unit": "EA",
+                    "confidence": 0.6
+                  }
+                ],
+                "fieldConfidence": {
+                  "customer": 0.95,
+                  "shipTo": 0.95,
+                  "needBy": 0.85
+                }
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 1547,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 406,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "match": {
+      "result": [
+        {
+          "lineIndex": 0,
+          "sku": "HP-9997-242412-SG",
+          "alternatives": [
+            "HP-9997-242412-G"
+          ],
+          "confidence": 0.6,
+          "reason": "Spec SBRMC 23 41 33 / 2.1.A accepts both 24x24 HEPAs; the gel-seal is listed for surgical terminal housings, but the galvanized unit also complies.",
+          "substitution": false
+        },
+        {
+          "lineIndex": 1,
+          "sku": "BX-M14-242412",
+          "alternatives": [
+            "BG-M14-2424-6P",
+            "BG-M14-2424-8P"
+          ],
+          "confidence": 0.4,
+          "reason": "Spec SBRMC 23 41 00 / 2.2.C allows a MERV 14 24x24 rigid box, 6-pocket bag or 8-pocket bag. The request doesn't say which, so the rigid box is a guess.",
+          "substitution": false
+        }
+      ],
+      "prompt": "Match each requested line to a SKU in the catalog below.\n\nMethod:\n1. Look for an exact SKU or an alias first.\n2. Otherwise use the spec crosswalk, or nominal size + MERV + family.\n3. If the requested size is not made, set sku to null and put the nearest alternative SKU in alternatives. substitution is false.\n4. If the size and filter type are made but the requested MERV rating is not, propose the same size and type at the nearest MERV that is made as the sku, and set substitution to true. Say so in the reason.\n5. Set confidence below 0.7 when the request is vague or several SKUs fit.\n6. Give a one-line reason.\n\nReturn exactly one match per line, with lineIndex equal to the line number. Use only SKUs from the catalog.\n\nCatalog (CSV):\nsku,name,family,merv,nominalSize,actualSize,sellUnit,unitsPerSell,specNotes\nPL-M8-16201,Pleated Panel Filter MERV 8 16x20x1,pleated,8,16x20x1,15.5x19.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-16251,Pleated Panel Filter MERV 8 16x25x1,pleated,8,16x25x1,15.5x24.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-20201,Pleated Panel Filter MERV 8 20x20x1,pleated,8,20x20x1,19.5x19.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-20251,Pleated Panel Filter MERV 8 20x25x1,pleated,8,20x25x1,19.5x24.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-16252,Pleated Panel Filter MERV 8 16x25x2,pleated,8,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-20252,Pleated Panel Filter MERV 8 20x25x2,pleated,8,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-24242,Pleated Panel Filter MERV 8 24x24x2,pleated,8,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-20202,Pleated Panel Filter MERV 8 20x20x2,pleated,8,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M11-16202,Pleated Panel Filter MERV 11 16x20x2,pleated,11,16x20x2,15.5x19.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-16252,Pleated Panel Filter MERV 11 16x25x2,pleated,11,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20202,Pleated Panel Filter MERV 11 20x20x2,pleated,11,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20252,Pleated Panel Filter MERV 11 20x25x2,pleated,11,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-24242,Pleated Panel Filter MERV 11 24x24x2,pleated,11,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20254,Pleated Panel Filter MERV 11 20x25x4,pleated,11,20x25x4,19.5x24.5x3.75,CASE,6 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 4\"\" depth\"\nPL-M11-24244,Pleated Panel Filter MERV 11 24x24x4,pleated,11,24x24x4,23.5x23.5x3.75,CASE,6 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 4\"\" depth\"\nPL-M13-16252,Pleated Panel Filter MERV 13 16x25x2,pleated,13,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-20202,Pleated Panel Filter MERV 13 20x20x2,pleated,13,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-20252,Pleated Panel Filter MERV 13 20x25x2,pleated,13,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-24242,Pleated Panel Filter MERV 13 24x24x2,pleated,13,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-16254,Pleated Panel Filter MERV 13 16x25x4,pleated,13,16x25x4,15.5x24.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-20204,Pleated Panel Filter MERV 13 20x20x4,pleated,13,20x20x4,19.5x19.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-20254,Pleated Panel Filter MERV 13 20x25x4,pleated,13,20x25x4,19.5x24.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-24244,Pleated Panel Filter MERV 13 24x24x4,pleated,13,24x24x4,23.5x23.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nBG-M13-2424-6P,Bag Filter MERV 13 6-Pocket 24x24x15,bag,13,24x24x15,23.375x23.375x15,EA,1 EA,MERV 13; 6 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-1224-6P,Bag Filter MERV 13 6-Pocket 12x24x15,bag,13,12x24x15,11.375x23.375x15,EA,1 EA,MERV 13; 6 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-2424-8P,Bag Filter MERV 13 8-Pocket 24x24x22,bag,13,24x24x22,23.375x23.375x22,EA,1 EA,MERV 13; 8 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-1224-8P,Bag Filter MERV 13 8-Pocket 12x24x22,bag,13,12x24x22,11.375x23.375x22,EA,1 EA,MERV 13; 8 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M14-2424-6P,Bag Filter MERV 14 6-Pocket 24x24x15,bag,14,24x24x15,23.375x23.375x15,EA,1 EA,MERV 14; 6 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-1224-6P,Bag Filter MERV 14 6-Pocket 12x24x15,bag,14,12x24x15,11.375x23.375x15,EA,1 EA,MERV 14; 6 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-2424-8P,Bag Filter MERV 14 8-Pocket 24x24x22,bag,14,24x24x22,23.375x23.375x22,EA,1 EA,MERV 14; 8 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-1224-8P,Bag Filter MERV 14 8-Pocket 12x24x22,bag,14,12x24x22,11.375x23.375x22,EA,1 EA,MERV 14; 8 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBX-M14-242412,Rigid Box Filter MERV 14 24x24x12,box,14,24x24x12,23.5x23.5x11.5,EA,1 EA,\"MERV 14; 90-95% ASHRAE dust spot; initial resistance 0.42 in. w.g. @ 500 fpm; single header, plastic frame\"\nBX-M14-122412,Rigid Box Filter MERV 14 12x24x12,box,14,12x24x12,11.5x23.5x11.5,EA,1 EA,\"MERV 14; 90-95% ASHRAE dust spot; initial resistance 0.42 in. w.g. @ 500 fpm; single header, plastic frame\"\nHP-9997-242412-G,HEPA Filter 99.97% 24x24x11.5 Galvanized Frame,hepa,,24x24x12,23.375x23.375x11.5,EA,1 EA,99.97% @ 0.3 micron; initial resistance 1.0 in. w.g. @ 250 fpm; galvanized steel frame; neoprene gasket\nHP-9997-242412-SG,HEPA Filter 99.97% 24x24x11.5 Stainless Gel-Seal,hepa,,24x24x12,23.375x23.375x11.5,EA,1 EA,99.97% @ 0.3 micron; initial resistance 1.0 in. w.g. @ 250 fpm; stainless steel frame; gel seal; for surgical/cleanroom terminal housings\nCB-M8-20252,Pleated Carbon Odor Filter 20x25x2,carbon,8,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 8; activated carbon impregnated pleated media, 200 g/SF carbon; initial resistance 0.30 in. w.g. @ 300 fpm\"\nCB-M8-24242,Pleated Carbon Odor Filter 24x24x2,carbon,8,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 8; activated carbon impregnated pleated media, 200 g/SF carbon; initial resistance 0.30 in. w.g. @ 300 fpm\"\nFR-GV-2424,Holding Frame Galvanized 24x24,frame,,24x24,23.75x23.75x4.75,EA,1 EA,\"16-ga galvanized steel; accepts 2\"\", 4\"\" and header filters with clips; universal holding frame\"\nFR-GV-1224,Holding Frame Galvanized 12x24,frame,,12x24,11.75x23.75x4.75,EA,1 EA,\"16-ga galvanized steel; accepts 2\"\", 4\"\" and header filters with clips; universal holding frame\"\nRM-M8-3090,\"Roll Media MERV 8 Synthetic 30\"\" x 90'\",media,8,30in x 90ft,30in x 90ft,ROLL,225 SF; 90 LF,\"MERV 8 synthetic polyester, 1\"\" loft, tackified; 225 SF per roll\"\nRM-M8-4590,\"Roll Media MERV 8 Synthetic 45\"\" x 90'\",media,8,45in x 90ft,45in x 90ft,ROLL,337.5 SF; 90 LF,\"MERV 8 synthetic polyester, 1\"\" loft, tackified; 337.5 SF per roll\"\n\nAliases (CSV):\nalias,sku,source\nCHT-RB14-2424,BX-M14-242412,plant2\nCHT-RB14-1224,BX-M14-122412,plant2\nCHT-CO-2025,CB-M8-20252,plant2\nCHT-CO-2424,CB-M8-24242,plant2\nCHT-HE-2424-G,HP-9997-242412-G,plant2\nCHT-HE-2424-SG,HP-9997-242412-SG,plant2\nCHT-BG14-2424-8,BG-M14-2424-8P,plant2\nCHT-BG14-1224-8,BG-M14-1224-8P,plant2\nCHT-BG14-2424-6,BG-M14-2424-6P,plant2\nCHT-BG14-1224-6,BG-M14-1224-6P,plant2\nCHT-BG13-2424-8,BG-M13-2424-8P,plant2\nCHT-BG13-1224-8,BG-M13-1224-8P,plant2\nCHT-BG13-2424-6,BG-M13-2424-6P,plant2\nCHT-BG13-1224-6,BG-M13-1224-6P,plant2\n400112,BX-M14-242412,plant2\n400113,BX-M14-122412,plant2\n410240,HP-9997-242412-G,plant2\n410241,HP-9997-242412-SG,plant2\n420250,CB-M8-20252,plant2\n420240,CB-M8-24242,plant2\n430288,BG-M14-2424-8P,plant2\nRNO-8-16201,PL-M8-16201,plant3\nRNO-8-16251,PL-M8-16251,plant3\nRNO-8-20201,PL-M8-20201,plant3\nRNO-8-20251,PL-M8-20251,plant3\nRNO-8-16252,PL-M8-16252,plant3\nRNO-8-20252,PL-M8-20252,plant3\nRNO-8-20202,PL-M8-20202,plant3\nRNO-8-24242,PL-M8-24242,plant3\nRNO-11-20252,PL-M11-20252,plant3\nRNO-11-24242,PL-M11-24242,plant3\nRNO-11-20254,PL-M11-20254,plant3\nRNO-11-24244,PL-M11-24244,plant3\nRNO-13-16252,PL-M13-16252,plant3\nRNO-13-20252,PL-M13-20252,plant3\nRNO-13-24242,PL-M13-24242,plant3\nRNO-13-20254,PL-M13-20254,plant3\nRNO-13-24244,PL-M13-24244,plant3\nRNO-MR30,RM-M8-3090,plant3\nRNO-MR45,RM-M8-4590,plant3\nM8 20x25x1,PL-M8-20251,customer\n2in MERV8 24x24,PL-M8-24242,customer\n6pk bag 24x24 M13,BG-M13-2424-6P,customer\n20x25x2 M8,PL-M8-20252,customer\n16x25x1 M8,PL-M8-16251,customer\nMERV8 16x20x1,PL-M8-16201,customer\n20x20x1 pleated,PL-M8-20201,customer\nM11 20x20x2,PL-M11-20202,customer\n24x24x2 MERV 11,PL-M11-24242,customer\n2in M13 16x25,PL-M13-16252,customer\n4in MERV13 20x25,PL-M13-20254,customer\nMERV 13 24x24x4,PL-M13-24244,customer\n8pk bag 24x24 M14,BG-M14-2424-8P,customer\n\nSpec crosswalk (CSV):\ncode,issuer,description,minMerv,filterType,acceptableSkus\nKRSD 23 41 00 / 2.2.A,school_district,\"2\"\" pleated prefilter, MERV 8 minimum\",8,pleated,PL-M8-16252; PL-M8-20252; PL-M8-24242; PL-M8-20202; PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nKRSD 23 41 00 / 2.2.B,school_district,\"4\"\" pleated final filter, MERV 13 minimum\",13,pleated,PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nKRSD 23 41 00 / 2.3.A,school_district,Galvanized holding frame,0,frame,FR-GV-2424; FR-GV-1224\nSBRMC 23 41 33 / 2.1.A,hospital,\"HEPA 99.97% @ 0.3 micron terminal filter, surgical suites\",16,hepa,HP-9997-242412-G; HP-9997-242412-SG\nSBRMC 23 41 00 / 2.2.C,hospital,\"MERV 14 final filter, bag or rigid box\",14,box,BX-M14-242412; BX-M14-122412; BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nSBRMC 23 41 00 / 2.1.A,hospital,\"2\"\" pleated prefilter ahead of final filter bank, MERV 8 minimum\",8,pleated,PL-M8-16252; PL-M8-20252; PL-M8-24242; PL-M8-20202; PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nPVRH 23 41 00 / 2.1.A,hospital,\"4\"\" pleated prefilter, MERV 13 minimum\",13,pleated,PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nPVRH 23 41 00 / 2.2.A,hospital,\"Bag final filter, MERV 14 minimum\",14,bag,BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nPVRH 23 41 33 / 2.1.B,hospital,\"HEPA 99.97% @ 0.3 micron, airborne isolation room exhaust\",16,hepa,HP-9997-242412-G; HP-9997-242412-SG\nLVUSD 23 41 00 / 2.1.A,school_district,\"1\"\" pleated return grille filter, MERV 8 minimum\",8,pleated,PL-M8-16201; PL-M8-16251; PL-M8-20201; PL-M8-20251\nLVUSD 23 41 00 / 2.1.B,school_district,\"2\"\" pleated classroom unit ventilator filter, MERV 11 minimum\",11,pleated,PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nLVUSD 23 41 00 / 2.2.A,school_district,\"Bag final filter for AHUs, MERV 13 minimum\",13,bag,BG-M13-2424-6P; BG-M13-1224-6P; BG-M13-2424-8P; BG-M13-1224-8P; BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nLVUSD 23 41 00 / 2.4.A,school_district,\"Kitchen hood makeup air odor filter, activated carbon pleated\",8,carbon,CB-M8-20252; CB-M8-24242\nCITY-WB 23 41 00 / 2.1.A,municipal,\"Synthetic roll media for makeup air units, MERV 8 minimum\",8,media,RM-M8-3090; RM-M8-4590\nCITY-WB 23 41 00 / 2.2.A,municipal,\"4\"\" pleated filter, MERV 11 minimum\",11,pleated,PL-M11-20254; PL-M11-24244; PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nCITY-WB 23 41 00 / 2.2.B,municipal,\"2\"\" pleated filter, public library, MERV 13 minimum\",13,pleated,PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nCITY-WB 23 41 00 / 2.3.A,municipal,\"Galvanized holding frame, 16-ga minimum\",0,frame,FR-GV-2424; FR-GV-1224\nCITY-WB 23 41 00 / 2.5.A,municipal,\"Activated carbon odor filter, wastewater plant admin building\",8,carbon,CB-M8-20252; CB-M8-24242\n\nLines:\n0: 8 of the terminal HEPAs (24x24) - must meet SBRMC 23 41 33 / 2.1.A (qty=8, unit=EA)\n1: 8 of the finals (also 24x24) - final bank, SBRMC 23 41 00 / 2.2.C (qty=8, unit=EA)\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPdSeuvDGz7VBJduTvX",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQS7ggKEAgSGAI4AUIIdGhpbmtpbmcSDGFCaiZ2xx/ZNQpazBoMyjJleXsMuLhGObwyIjDMnTZd9Zrpm+7xdkjvf/XFdU0AN+UNA1M+JiTwvYgj8Vu9pOhm0W6Ez+KD5gxv3W0qiwi3eokvoPot92t8+SnJL93H9q0QFc8nHDsSWhuywBh0XvhMEewhFAEPiSNjx4cQ+6dRjMt9OWKX+O1P8SjzWJ8nTbBg24l8l9OS0rsPRFTjTzgZwUrzTcSCQ2mn1+lCDVM6v0nvzEcB6r+N4dh1z5Owxwo1OBIWhdKATvPMhwRThHx6ahtFFHuxvRxFrYvGPX7SIFH3VEiPLlLpIsj8GoV71SjoydfRGUCkLzop12jzWhljFoCPYvFDQQTMEguwQSXC85XeU5V7HNTqnAVMBRR3HzLiEb0v5j5SN80CT1fPEBPu+XtIw6cgFqNtALfg+bznjedmZZx4E3BgkgxMVT484l1pK8sNWpvPWODtV7wR8yPCSzCYQ3EQuAJt0S6AWhoPhFymKYOGOlltmUkHWRK0/R3f2BD4FwWluMb5S43hUuizLvkHwlj1NhgIae0upipaqGlK95lFQUkY7Eq9BmCDLayTkm2W1EbVbtQetstfhNsRmsfmHGcEdDxCCunCrlji6gFGg7OkwS2LMfGLv/ceR/7HtoadUPvBV9hFpFfu+vOiZsHf051C9agGEkDDSEkkvUJeWJWNKadVAA82tOLVbFhO0EYRhpO0QcM4DryJBt5Z/8H3mlxPNsg7uj5yMAl2MoFavXjNfekSode0+RZj0ygW1MYXQ3193FXET6lEP5FgwRO0r3z+m5AvorNDvuANKgBoBpmAg0RHPa0VQGj50Li9dlZ9z6B8fqd2nPJgoibPa3CB0P6zHH84+fsYF3sm26gBGlFUL/pvpBxgqzf/wcvvMFRPUoYGchIqYoAV7qN5ssfJ6qiSxfqZWx+3pbI/2KacwNFVcMaF0fh5igSzSkedDksJiWgeu9VLYOSrEnJkbCBfwjMCm2FaD3LP6VNiwFp6+5h7fX66E7WTkMQSKLCH2MFSBj21OlTb6LHkIv3Q86iMPWtV8KBK7OMU34cYqL85l/CTe6y4GNWaYLCH93yL8crTywfZTowFKCLyEia1OrRe/rqUoGEO1kBxj/HnR9cfmQGwDda7KSPzIXhZr2iM4h4fWPG8ppHP1+84jSx1qxwqDij67ruXsxe+a8aMPFuwsxd0Mkfn5sHB/5XtWoYdUVfu1nzFfIJ2h1/++3ZJxb60tMs+bgPgfBNZ+R1NSiNXiFWSok1410GIc+2m2arMdHhR+EV9KUp+RfA9Ew+5+8JwkjN2iqRXrOH59FKIpxoye+6BfeCXGnpZyEaVTsCVxKHWrjnxb1jnX5fuMvWSop8ljtoeultauPf4dpPkT1l7/Fk1XLFACkLNeP77U0cvfVD+WRruBxXj++QohnwFtE4pcapORY8lGg5hmVBSPAyRYUqvpDHFbI/yY0lrOayxjG1f0QiB8VgYAQ=="
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_014XkUTkT1iYgqaUvxzhzj31",
+              "name": "record_matches",
+              "input": {
+                "matches": [
+                  {
+                    "lineIndex": 0,
+                    "sku": "HP-9997-242412-SG",
+                    "alternatives": [
+                      "HP-9997-242412-G"
+                    ],
+                    "confidence": 0.6,
+                    "reason": "Spec SBRMC 23 41 33 / 2.1.A accepts both 24x24 HEPAs; the gel-seal is listed for surgical terminal housings, but the galvanized unit also complies.",
+                    "substitution": false
+                  },
+                  {
+                    "lineIndex": 1,
+                    "sku": "BX-M14-242412",
+                    "alternatives": [
+                      "BG-M14-2424-6P",
+                      "BG-M14-2424-8P"
+                    ],
+                    "confidence": 0.4,
+                    "reason": "Spec SBRMC 23 41 00 / 2.2.C allows a MERV 14 24x24 rigid box, 6-pocket bag or 8-pocket bag. The request doesn't say which, so the rigid box is a guess.",
+                    "substitution": false
+                  }
+                ]
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 8834,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 607,
+            "output_tokens_details": {
+              "thinking_tokens": 268
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "draft": {
+      "result": "Subject: Re: Filters for OR 4 air handler\n\nHello Cheryl,\n\nThank you for your request. Here is our quote, based on the quantities in your email:\n\n- HP-9997-242412-SG (terminal HEPA, 24x24, for SBRMC 23 41 33 / 2.1.A): 8 EA at $399.48 each, $3,195.84\n- BX-M14-242412 (final filter, 24x24, for SBRMC 23 41 00 / 2.2.C): 8 EA at $78.53 each, $628.24\n\nSubtotal: $3,824.08\nFreight (2 pallets): $240\nTotal: $4,064.08\n\nStock is short on this order. We have not yet confirmed which line is affected or how many we can supply, so we can't confirm delivery to Central Receiving by 10/16 at this time.\n\nBecause these are recommendations, please have your engineer confirm that both models meet the specs you listed. If maintenance changes the quantities, let us know and we will update the quote.\n\nNorthfield Air Filtration Sales",
+      "prompt": "Write a short, plain reply email to this customer quote request.\n\nRules:\n- Use only the numbers in the facts below, exactly as given. Never calculate a new number.\n- If \"missing\" is not empty, ask only for those fields.\n- If flags include no_match, substitution or short_stock, say so plainly for the affected lines.\n- Do not invent lead times, terms or discounts.\n- Sign off as \"Northfield Air Filtration Sales\".\n\nOriginal email:\n---\nFrom: Cheryl Ambrose <cambrose@stbrendanmed.example>\nSubject: Filters for OR 4 air handler\nReceived: 2026-09-30T08:05:00-05:00\n\nHello,\n\nFacilities is replacing filters on the air handler serving OR 4 and OR 5. Could you recommend and quote the best filters for a hospital operating room air handler? Our engineer says the terminal filters need to meet SBRMC 23 41 33 / 2.1.A and the final bank is SBRMC 23 41 00 / 2.2.C.\n\nI think it's 8 of the terminal HEPAs (24x24) and 8 of the finals (also 24x24) but I'm not 100% sure, maintenance is double-checking.\n\nDeliver to Central Receiving, 900 Medical Center Dr, Huntsville AL 35801 by 10/16.\n\nThank you,\nCheryl Ambrose\nFacilities Bid Desk\nSt. Brendan Regional Medical Center\n256-555-0104\n---\n\nFacts (JSON):\n{\n  \"customerName\": \"St. Brendan Regional Medical Center (Facilities Bid Desk)\",\n  \"lines\": [\n    {\n      \"text\": \"8 of the terminal HEPAs (24x24) - must meet SBRMC 23 41 33 / 2.1.A\",\n      \"sku\": \"HP-9997-242412-SG\",\n      \"sellQty\": 8,\n      \"sellUnit\": \"EA\",\n      \"unitPrice\": 399.48,\n      \"extPrice\": 3195.84\n    },\n    {\n      \"text\": \"8 of the finals (also 24x24) - final bank, SBRMC 23 41 00 / 2.2.C\",\n      \"sku\": \"BX-M14-242412\",\n      \"sellQty\": 8,\n      \"sellUnit\": \"EA\",\n      \"unitPrice\": 78.53,\n      \"extPrice\": 628.24\n    }\n  ],\n  \"totals\": {\n    \"subtotal\": 3824.08,\n    \"pallets\": 2,\n    \"volumeDiscount\": 0.03,\n    \"freight\": 240,\n    \"total\": 4064.08\n  },\n  \"flags\": [\n    \"low_confidence\",\n    \"short_stock\"\n  ],\n  \"missing\": []\n}\n",
+      "raw": {
+        "model": "claude-sonnet-5-5",
+        "id": "msg_011CfaPdqqvdz9CRBF4JyMG4",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "signature": "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"
+          },
+          {
+            "type": "text",
+            "text": "Subject: Re: Filters for OR 4 air handler\n\nHello Cheryl,\n\nThank you for your request. Here is our quote, based on the quantities in your email:\n\n- HP-9997-242412-SG (terminal HEPA, 24x24, for SBRMC 23 41 33 / 2.1.A): 8 EA at $399.48 each, $3,195.84\n- BX-M14-242412 (final filter, 24x24, for SBRMC 23 41 00 / 2.2.C): 8 EA at $78.53 each, $628.24\n\nSubtotal: $3,824.08\nFreight (2 pallets): $240\nTotal: $4,064.08\n\nStock is short on this order. We have not yet confirmed which line is affected or how many we can supply, so we can't confirm delivery to Central Receiving by 10/16 at this time.\n\nBecause these are recommendations, please have your engineer confirm that both models meet the specs you listed. If maintenance changes the quantities, let us know and we will update the quote.\n\nNorthfield Air Filtration Sales"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 901,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 1055,
+          "output_tokens_details": {
+            "thinking_tokens": 709
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      }
+    }
+  }
+}

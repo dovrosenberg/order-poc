@@ -1,0 +1,390 @@
+{
+  "record": {
+    "requestId": "R04",
+    "classification": "quote_request",
+    "lines": [
+      {
+        "text": "CHT-RB14-2424 - 16 ea",
+        "qty": 16,
+        "unit": "EA",
+        "sku": "BX-M14-242412",
+        "reason": "Exact alias CHT-RB14-2424 maps to rigid box MERV 14 24x24x12."
+      },
+      {
+        "text": "CHT-RB14-1224 - 8 ea",
+        "qty": 8,
+        "unit": "EA",
+        "sku": "BX-M14-122412",
+        "reason": "Exact alias CHT-RB14-1224 maps to rigid box MERV 14 12x24x12."
+      },
+      {
+        "text": "CHT-CO-2025 - 6 cs",
+        "qty": 6,
+        "unit": "CASE",
+        "sku": "CB-M8-20252",
+        "reason": "Exact alias CHT-CO-2025 maps to carbon odor filter 20x25x2 (case of 12)."
+      },
+      {
+        "text": "CHT-HE-2424-G - 4 ea",
+        "qty": 4,
+        "unit": "EA",
+        "sku": "HP-9997-242412-G",
+        "reason": "Exact alias CHT-HE-2424-G maps to HEPA 99.97% galvanized frame."
+      },
+      {
+        "text": "CHT-BG14-2424-8 - 24 ea",
+        "qty": 24,
+        "unit": "EA",
+        "sku": "BG-M14-2424-8P",
+        "reason": "Exact alias CHT-BG14-2424-8 maps to MERV 14 8-pocket bag 24x24x22."
+      }
+    ],
+    "flags": []
+  },
+  "steps": {
+    "classify": {
+      "result": "quote_request",
+      "reason": "The sender asks for updated pricing on a list of specific part numbers and quantities before placing a PO, which is a request for a quote rather than a repeat of an earlier order or a status check.",
+      "prompt": "Classify this inbound email to an air filter manufacturer's sales inbox.\n\nCategories:\n- quote_request: asks for pricing or a quote on new items.\n- order_status: asks about an existing order or shipment.\n- reorder: asks to repeat a previous order.\n- other: anything else.\n\nEmail:\n---\nFrom: Darnell Pruitt <dpruitt@cumberlandmro.example>\nSubject: PO pricing request - CHT items\nReceived: 2026-09-28T13:05:00-04:00\n\nHey team,\n\nCan I get updated pricing on these before I cut the PO. Same old Chattanooga numbers we always use:\n\nCHT-RB14-2424 - 16 ea\nCHT-RB14-1224 - 8 ea\nCHT-CO-2025 - 6 cs\nCHT-HE-2424-G - 4 ea\nCHT-BG14-2424-8 - 24 ea\n\nShip to our Riverfront whse (1275 Riverfront Industrial Pkwy, Chattanooga TN 37406). Need by 10/12 if possible.\n\nThanks,\nDarnell Pruitt\nPurchasing Mgr, Cumberland MRO Distribution\n423-555-0170\n\nCONFIDENTIALITY NOTICE: This e-mail is intended only for the addressee.\n---\n\nCall the tool with the category and a one-sentence reason.\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPZ1CcWPa2sqBcakg6w",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01G9mPWAxoq62R5LSggPp2Z9",
+              "name": "record_classification",
+              "input": {
+                "classification": "quote_request",
+                "reason": "The sender asks for updated pricing on a list of specific part numbers and quantities before placing a PO, which is a request for a quote rather than a repeat of an earlier order or a status check."
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 897,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 131,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "extract": {
+      "result": {
+        "customerName": "Cumberland MRO Distribution",
+        "shipTo": "Riverfront whse, 1275 Riverfront Industrial Pkwy, Chattanooga TN 37406",
+        "needBy": "2026-10-12",
+        "bidDueAt": null,
+        "targetUnitPrice": null,
+        "lines": [
+          {
+            "text": "CHT-RB14-2424 - 16 ea",
+            "qty": 16,
+            "unit": "EA",
+            "confidence": 0.97
+          },
+          {
+            "text": "CHT-RB14-1224 - 8 ea",
+            "qty": 8,
+            "unit": "EA",
+            "confidence": 0.97
+          },
+          {
+            "text": "CHT-CO-2025 - 6 cs",
+            "qty": 6,
+            "unit": "CASE",
+            "confidence": 0.97
+          },
+          {
+            "text": "CHT-HE-2424-G - 4 ea",
+            "qty": 4,
+            "unit": "EA",
+            "confidence": 0.97
+          },
+          {
+            "text": "CHT-BG14-2424-8 - 24 ea",
+            "qty": 24,
+            "unit": "EA",
+            "confidence": 0.97
+          }
+        ],
+        "fieldConfidence": {
+          "customer": 0.92,
+          "shipTo": 0.93,
+          "needBy": 0.85
+        }
+      },
+      "prompt": "Extract the current request from this email. Ignore quoted earlier messages that are not the ask.\n\nRules:\n- One line per requested item. Set text to the line as written.\n- Copy qty and unit as written. Map units: case/cs -> CASE, each/ea/pcs -> EA, sq ft -> SF, linear ft/lin ft -> LF, rolls -> ROLL, pallets -> PALLET. A count of filters with no unit stated (\"8 of the HEPAs\", a quantity column in an equipment schedule) is EA. Use null only if no quantity is stated at all.\n- Do not convert units or do any math.\n- customerName, shipTo, needBy: use null if not stated.\n- bidDueAt: the bid or response due date and time as ISO 8601, if stated; otherwise null.\n- targetUnitPrice: only if the customer names a price they want; otherwise null.\n- Give each line a confidence from 0 to 1, and a confidence for customer, shipTo and needBy.\n\nEmail:\n---\nFrom: Darnell Pruitt <dpruitt@cumberlandmro.example>\nSubject: PO pricing request - CHT items\nReceived: 2026-09-28T13:05:00-04:00\n\nHey team,\n\nCan I get updated pricing on these before I cut the PO. Same old Chattanooga numbers we always use:\n\nCHT-RB14-2424 - 16 ea\nCHT-RB14-1224 - 8 ea\nCHT-CO-2025 - 6 cs\nCHT-HE-2424-G - 4 ea\nCHT-BG14-2424-8 - 24 ea\n\nShip to our Riverfront whse (1275 Riverfront Industrial Pkwy, Chattanooga TN 37406). Need by 10/12 if possible.\n\nThanks,\nDarnell Pruitt\nPurchasing Mgr, Cumberland MRO Distribution\n423-555-0170\n\nCONFIDENTIALITY NOTICE: This e-mail is intended only for the addressee.\n---\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPZ79nNrhhHq3pGM5kN",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_019d1frboPif8Mmv3awHzM3F",
+              "name": "record_extraction",
+              "input": {
+                "customerName": "Cumberland MRO Distribution",
+                "shipTo": "Riverfront whse, 1275 Riverfront Industrial Pkwy, Chattanooga TN 37406",
+                "needBy": "2026-10-12",
+                "bidDueAt": null,
+                "targetUnitPrice": null,
+                "lines": [
+                  {
+                    "text": "CHT-RB14-2424 - 16 ea",
+                    "qty": 16,
+                    "unit": "EA",
+                    "confidence": 0.97
+                  },
+                  {
+                    "text": "CHT-RB14-1224 - 8 ea",
+                    "qty": 8,
+                    "unit": "EA",
+                    "confidence": 0.97
+                  },
+                  {
+                    "text": "CHT-CO-2025 - 6 cs",
+                    "qty": 6,
+                    "unit": "CASE",
+                    "confidence": 0.97
+                  },
+                  {
+                    "text": "CHT-HE-2424-G - 4 ea",
+                    "qty": 4,
+                    "unit": "EA",
+                    "confidence": 0.97
+                  },
+                  {
+                    "text": "CHT-BG14-2424-8 - 24 ea",
+                    "qty": 24,
+                    "unit": "EA",
+                    "confidence": 0.97
+                  }
+                ],
+                "fieldConfidence": {
+                  "customer": 0.92,
+                  "shipTo": 0.93,
+                  "needBy": 0.85
+                }
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 1543,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 504,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "match": {
+      "result": [
+        {
+          "lineIndex": 0,
+          "sku": "BX-M14-242412",
+          "alternatives": [],
+          "confidence": 0.99,
+          "reason": "Exact alias CHT-RB14-2424 maps to rigid box MERV 14 24x24x12.",
+          "substitution": false
+        },
+        {
+          "lineIndex": 1,
+          "sku": "BX-M14-122412",
+          "alternatives": [],
+          "confidence": 0.99,
+          "reason": "Exact alias CHT-RB14-1224 maps to rigid box MERV 14 12x24x12.",
+          "substitution": false
+        },
+        {
+          "lineIndex": 2,
+          "sku": "CB-M8-20252",
+          "alternatives": [],
+          "confidence": 0.99,
+          "reason": "Exact alias CHT-CO-2025 maps to carbon odor filter 20x25x2 (case of 12).",
+          "substitution": false
+        },
+        {
+          "lineIndex": 3,
+          "sku": "HP-9997-242412-G",
+          "alternatives": [],
+          "confidence": 0.99,
+          "reason": "Exact alias CHT-HE-2424-G maps to HEPA 99.97% galvanized frame.",
+          "substitution": false
+        },
+        {
+          "lineIndex": 4,
+          "sku": "BG-M14-2424-8P",
+          "alternatives": [],
+          "confidence": 0.99,
+          "reason": "Exact alias CHT-BG14-2424-8 maps to MERV 14 8-pocket bag 24x24x22.",
+          "substitution": false
+        }
+      ],
+      "prompt": "Match each requested line to a SKU in the catalog below.\n\nMethod:\n1. Look for an exact SKU or an alias first.\n2. Otherwise use the spec crosswalk, or nominal size + MERV + family.\n3. If the requested size is not made, set sku to null and put the nearest alternative SKU in alternatives. substitution is false.\n4. If the size and filter type are made but the requested MERV rating is not, propose the same size and type at the nearest MERV that is made as the sku, and set substitution to true. Say so in the reason.\n5. Set confidence below 0.7 when the request is vague or several SKUs fit.\n6. Give a one-line reason.\n\nReturn exactly one match per line, with lineIndex equal to the line number. Use only SKUs from the catalog.\n\nCatalog (CSV):\nsku,name,family,merv,nominalSize,actualSize,sellUnit,unitsPerSell,specNotes\nPL-M8-16201,Pleated Panel Filter MERV 8 16x20x1,pleated,8,16x20x1,15.5x19.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-16251,Pleated Panel Filter MERV 8 16x25x1,pleated,8,16x25x1,15.5x24.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-20201,Pleated Panel Filter MERV 8 20x20x1,pleated,8,20x20x1,19.5x19.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-20251,Pleated Panel Filter MERV 8 20x25x1,pleated,8,20x25x1,19.5x24.5x0.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 1\"\" depth\"\nPL-M8-16252,Pleated Panel Filter MERV 8 16x25x2,pleated,8,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-20252,Pleated Panel Filter MERV 8 20x25x2,pleated,8,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-24242,Pleated Panel Filter MERV 8 24x24x2,pleated,8,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M8-20202,Pleated Panel Filter MERV 8 20x20x2,pleated,8,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 8; initial resistance 0.22 in. w.g. @ 300 fpm; beverage-board frame; 2\"\" depth\"\nPL-M11-16202,Pleated Panel Filter MERV 11 16x20x2,pleated,11,16x20x2,15.5x19.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-16252,Pleated Panel Filter MERV 11 16x25x2,pleated,11,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20202,Pleated Panel Filter MERV 11 20x20x2,pleated,11,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20252,Pleated Panel Filter MERV 11 20x25x2,pleated,11,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-24242,Pleated Panel Filter MERV 11 24x24x2,pleated,11,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 2\"\" depth\"\nPL-M11-20254,Pleated Panel Filter MERV 11 20x25x4,pleated,11,20x25x4,19.5x24.5x3.75,CASE,6 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 4\"\" depth\"\nPL-M11-24244,Pleated Panel Filter MERV 11 24x24x4,pleated,11,24x24x4,23.5x23.5x3.75,CASE,6 EA,\"MERV 11; initial resistance 0.27 in. w.g. @ 300 fpm; moisture-resistant beverage-board frame; 4\"\" depth\"\nPL-M13-16252,Pleated Panel Filter MERV 13 16x25x2,pleated,13,16x25x2,15.5x24.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-20202,Pleated Panel Filter MERV 13 20x20x2,pleated,13,20x20x2,19.5x19.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-20252,Pleated Panel Filter MERV 13 20x25x2,pleated,13,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-24242,Pleated Panel Filter MERV 13 24x24x2,pleated,13,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 2\"\" depth\"\nPL-M13-16254,Pleated Panel Filter MERV 13 16x25x4,pleated,13,16x25x4,15.5x24.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-20204,Pleated Panel Filter MERV 13 20x20x4,pleated,13,20x20x4,19.5x19.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-20254,Pleated Panel Filter MERV 13 20x25x4,pleated,13,20x25x4,19.5x24.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nPL-M13-24244,Pleated Panel Filter MERV 13 24x24x4,pleated,13,24x24x4,23.5x23.5x3.75,CASE,6 EA,\"MERV 13; initial resistance 0.31 in. w.g. @ 300 fpm; high-wet-strength board frame; 4\"\" depth\"\nBG-M13-2424-6P,Bag Filter MERV 13 6-Pocket 24x24x15,bag,13,24x24x15,23.375x23.375x15,EA,1 EA,MERV 13; 6 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-1224-6P,Bag Filter MERV 13 6-Pocket 12x24x15,bag,13,12x24x15,11.375x23.375x15,EA,1 EA,MERV 13; 6 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-2424-8P,Bag Filter MERV 13 8-Pocket 24x24x22,bag,13,24x24x22,23.375x23.375x22,EA,1 EA,MERV 13; 8 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M13-1224-8P,Bag Filter MERV 13 8-Pocket 12x24x22,bag,13,12x24x22,11.375x23.375x22,EA,1 EA,MERV 13; 8 pockets; synthetic media; initial resistance 0.30 in. w.g. @ 500 fpm; galvanized header\nBG-M14-2424-6P,Bag Filter MERV 14 6-Pocket 24x24x15,bag,14,24x24x15,23.375x23.375x15,EA,1 EA,MERV 14; 6 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-1224-6P,Bag Filter MERV 14 6-Pocket 12x24x15,bag,14,12x24x15,11.375x23.375x15,EA,1 EA,MERV 14; 6 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-2424-8P,Bag Filter MERV 14 8-Pocket 24x24x22,bag,14,24x24x22,23.375x23.375x22,EA,1 EA,MERV 14; 8 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBG-M14-1224-8P,Bag Filter MERV 14 8-Pocket 12x24x22,bag,14,12x24x22,11.375x23.375x22,EA,1 EA,MERV 14; 8 pockets; synthetic media; initial resistance 0.38 in. w.g. @ 500 fpm; galvanized header\nBX-M14-242412,Rigid Box Filter MERV 14 24x24x12,box,14,24x24x12,23.5x23.5x11.5,EA,1 EA,\"MERV 14; 90-95% ASHRAE dust spot; initial resistance 0.42 in. w.g. @ 500 fpm; single header, plastic frame\"\nBX-M14-122412,Rigid Box Filter MERV 14 12x24x12,box,14,12x24x12,11.5x23.5x11.5,EA,1 EA,\"MERV 14; 90-95% ASHRAE dust spot; initial resistance 0.42 in. w.g. @ 500 fpm; single header, plastic frame\"\nHP-9997-242412-G,HEPA Filter 99.97% 24x24x11.5 Galvanized Frame,hepa,,24x24x12,23.375x23.375x11.5,EA,1 EA,99.97% @ 0.3 micron; initial resistance 1.0 in. w.g. @ 250 fpm; galvanized steel frame; neoprene gasket\nHP-9997-242412-SG,HEPA Filter 99.97% 24x24x11.5 Stainless Gel-Seal,hepa,,24x24x12,23.375x23.375x11.5,EA,1 EA,99.97% @ 0.3 micron; initial resistance 1.0 in. w.g. @ 250 fpm; stainless steel frame; gel seal; for surgical/cleanroom terminal housings\nCB-M8-20252,Pleated Carbon Odor Filter 20x25x2,carbon,8,20x25x2,19.5x24.5x1.75,CASE,12 EA,\"MERV 8; activated carbon impregnated pleated media, 200 g/SF carbon; initial resistance 0.30 in. w.g. @ 300 fpm\"\nCB-M8-24242,Pleated Carbon Odor Filter 24x24x2,carbon,8,24x24x2,23.5x23.5x1.75,CASE,12 EA,\"MERV 8; activated carbon impregnated pleated media, 200 g/SF carbon; initial resistance 0.30 in. w.g. @ 300 fpm\"\nFR-GV-2424,Holding Frame Galvanized 24x24,frame,,24x24,23.75x23.75x4.75,EA,1 EA,\"16-ga galvanized steel; accepts 2\"\", 4\"\" and header filters with clips; universal holding frame\"\nFR-GV-1224,Holding Frame Galvanized 12x24,frame,,12x24,11.75x23.75x4.75,EA,1 EA,\"16-ga galvanized steel; accepts 2\"\", 4\"\" and header filters with clips; universal holding frame\"\nRM-M8-3090,\"Roll Media MERV 8 Synthetic 30\"\" x 90'\",media,8,30in x 90ft,30in x 90ft,ROLL,225 SF; 90 LF,\"MERV 8 synthetic polyester, 1\"\" loft, tackified; 225 SF per roll\"\nRM-M8-4590,\"Roll Media MERV 8 Synthetic 45\"\" x 90'\",media,8,45in x 90ft,45in x 90ft,ROLL,337.5 SF; 90 LF,\"MERV 8 synthetic polyester, 1\"\" loft, tackified; 337.5 SF per roll\"\n\nAliases (CSV):\nalias,sku,source\nCHT-RB14-2424,BX-M14-242412,plant2\nCHT-RB14-1224,BX-M14-122412,plant2\nCHT-CO-2025,CB-M8-20252,plant2\nCHT-CO-2424,CB-M8-24242,plant2\nCHT-HE-2424-G,HP-9997-242412-G,plant2\nCHT-HE-2424-SG,HP-9997-242412-SG,plant2\nCHT-BG14-2424-8,BG-M14-2424-8P,plant2\nCHT-BG14-1224-8,BG-M14-1224-8P,plant2\nCHT-BG14-2424-6,BG-M14-2424-6P,plant2\nCHT-BG14-1224-6,BG-M14-1224-6P,plant2\nCHT-BG13-2424-8,BG-M13-2424-8P,plant2\nCHT-BG13-1224-8,BG-M13-1224-8P,plant2\nCHT-BG13-2424-6,BG-M13-2424-6P,plant2\nCHT-BG13-1224-6,BG-M13-1224-6P,plant2\n400112,BX-M14-242412,plant2\n400113,BX-M14-122412,plant2\n410240,HP-9997-242412-G,plant2\n410241,HP-9997-242412-SG,plant2\n420250,CB-M8-20252,plant2\n420240,CB-M8-24242,plant2\n430288,BG-M14-2424-8P,plant2\nRNO-8-16201,PL-M8-16201,plant3\nRNO-8-16251,PL-M8-16251,plant3\nRNO-8-20201,PL-M8-20201,plant3\nRNO-8-20251,PL-M8-20251,plant3\nRNO-8-16252,PL-M8-16252,plant3\nRNO-8-20252,PL-M8-20252,plant3\nRNO-8-20202,PL-M8-20202,plant3\nRNO-8-24242,PL-M8-24242,plant3\nRNO-11-20252,PL-M11-20252,plant3\nRNO-11-24242,PL-M11-24242,plant3\nRNO-11-20254,PL-M11-20254,plant3\nRNO-11-24244,PL-M11-24244,plant3\nRNO-13-16252,PL-M13-16252,plant3\nRNO-13-20252,PL-M13-20252,plant3\nRNO-13-24242,PL-M13-24242,plant3\nRNO-13-20254,PL-M13-20254,plant3\nRNO-13-24244,PL-M13-24244,plant3\nRNO-MR30,RM-M8-3090,plant3\nRNO-MR45,RM-M8-4590,plant3\nM8 20x25x1,PL-M8-20251,customer\n2in MERV8 24x24,PL-M8-24242,customer\n6pk bag 24x24 M13,BG-M13-2424-6P,customer\n20x25x2 M8,PL-M8-20252,customer\n16x25x1 M8,PL-M8-16251,customer\nMERV8 16x20x1,PL-M8-16201,customer\n20x20x1 pleated,PL-M8-20201,customer\nM11 20x20x2,PL-M11-20202,customer\n24x24x2 MERV 11,PL-M11-24242,customer\n2in M13 16x25,PL-M13-16252,customer\n4in MERV13 20x25,PL-M13-20254,customer\nMERV 13 24x24x4,PL-M13-24244,customer\n8pk bag 24x24 M14,BG-M14-2424-8P,customer\n\nSpec crosswalk (CSV):\ncode,issuer,description,minMerv,filterType,acceptableSkus\nKRSD 23 41 00 / 2.2.A,school_district,\"2\"\" pleated prefilter, MERV 8 minimum\",8,pleated,PL-M8-16252; PL-M8-20252; PL-M8-24242; PL-M8-20202; PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nKRSD 23 41 00 / 2.2.B,school_district,\"4\"\" pleated final filter, MERV 13 minimum\",13,pleated,PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nKRSD 23 41 00 / 2.3.A,school_district,Galvanized holding frame,0,frame,FR-GV-2424; FR-GV-1224\nSBRMC 23 41 33 / 2.1.A,hospital,\"HEPA 99.97% @ 0.3 micron terminal filter, surgical suites\",16,hepa,HP-9997-242412-G; HP-9997-242412-SG\nSBRMC 23 41 00 / 2.2.C,hospital,\"MERV 14 final filter, bag or rigid box\",14,box,BX-M14-242412; BX-M14-122412; BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nSBRMC 23 41 00 / 2.1.A,hospital,\"2\"\" pleated prefilter ahead of final filter bank, MERV 8 minimum\",8,pleated,PL-M8-16252; PL-M8-20252; PL-M8-24242; PL-M8-20202; PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nPVRH 23 41 00 / 2.1.A,hospital,\"4\"\" pleated prefilter, MERV 13 minimum\",13,pleated,PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nPVRH 23 41 00 / 2.2.A,hospital,\"Bag final filter, MERV 14 minimum\",14,bag,BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nPVRH 23 41 33 / 2.1.B,hospital,\"HEPA 99.97% @ 0.3 micron, airborne isolation room exhaust\",16,hepa,HP-9997-242412-G; HP-9997-242412-SG\nLVUSD 23 41 00 / 2.1.A,school_district,\"1\"\" pleated return grille filter, MERV 8 minimum\",8,pleated,PL-M8-16201; PL-M8-16251; PL-M8-20201; PL-M8-20251\nLVUSD 23 41 00 / 2.1.B,school_district,\"2\"\" pleated classroom unit ventilator filter, MERV 11 minimum\",11,pleated,PL-M11-16202; PL-M11-16252; PL-M11-20202; PL-M11-20252; PL-M11-24242; PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nLVUSD 23 41 00 / 2.2.A,school_district,\"Bag final filter for AHUs, MERV 13 minimum\",13,bag,BG-M13-2424-6P; BG-M13-1224-6P; BG-M13-2424-8P; BG-M13-1224-8P; BG-M14-2424-6P; BG-M14-1224-6P; BG-M14-2424-8P; BG-M14-1224-8P\nLVUSD 23 41 00 / 2.4.A,school_district,\"Kitchen hood makeup air odor filter, activated carbon pleated\",8,carbon,CB-M8-20252; CB-M8-24242\nCITY-WB 23 41 00 / 2.1.A,municipal,\"Synthetic roll media for makeup air units, MERV 8 minimum\",8,media,RM-M8-3090; RM-M8-4590\nCITY-WB 23 41 00 / 2.2.A,municipal,\"4\"\" pleated filter, MERV 11 minimum\",11,pleated,PL-M11-20254; PL-M11-24244; PL-M13-16254; PL-M13-20204; PL-M13-20254; PL-M13-24244\nCITY-WB 23 41 00 / 2.2.B,municipal,\"2\"\" pleated filter, public library, MERV 13 minimum\",13,pleated,PL-M13-16252; PL-M13-20202; PL-M13-20252; PL-M13-24242\nCITY-WB 23 41 00 / 2.3.A,municipal,\"Galvanized holding frame, 16-ga minimum\",0,frame,FR-GV-2424; FR-GV-1224\nCITY-WB 23 41 00 / 2.5.A,municipal,\"Activated carbon odor filter, wastewater plant admin building\",8,carbon,CB-M8-20252; CB-M8-24242\n\nLines:\n0: CHT-RB14-2424 - 16 ea (qty=16, unit=EA)\n1: CHT-RB14-1224 - 8 ea (qty=8, unit=EA)\n2: CHT-CO-2025 - 6 cs (qty=6, unit=CASE)\n3: CHT-HE-2424-G - 4 ea (qty=4, unit=EA)\n4: CHT-BG14-2424-8 - 24 ea (qty=24, unit=EA)\n",
+      "raw": [
+        {
+          "model": "claude-sonnet-5-5",
+          "id": "msg_011CfaPZScZkDaKiV1efpPq8",
+          "type": "message",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01YS9Q8r2rwfxGPAaNt9dHmc",
+              "name": "record_matches",
+              "input": {
+                "matches": [
+                  {
+                    "lineIndex": 0,
+                    "sku": "BX-M14-242412",
+                    "alternatives": [],
+                    "confidence": 0.99,
+                    "reason": "Exact alias CHT-RB14-2424 maps to rigid box MERV 14 24x24x12.",
+                    "substitution": false
+                  },
+                  {
+                    "lineIndex": 1,
+                    "sku": "BX-M14-122412",
+                    "alternatives": [],
+                    "confidence": 0.99,
+                    "reason": "Exact alias CHT-RB14-1224 maps to rigid box MERV 14 12x24x12.",
+                    "substitution": false
+                  },
+                  {
+                    "lineIndex": 2,
+                    "sku": "CB-M8-20252",
+                    "alternatives": [],
+                    "confidence": 0.99,
+                    "reason": "Exact alias CHT-CO-2025 maps to carbon odor filter 20x25x2 (case of 12).",
+                    "substitution": false
+                  },
+                  {
+                    "lineIndex": 3,
+                    "sku": "HP-9997-242412-G",
+                    "alternatives": [],
+                    "confidence": 0.99,
+                    "reason": "Exact alias CHT-HE-2424-G maps to HEPA 99.97% galvanized frame.",
+                    "substitution": false
+                  },
+                  {
+                    "lineIndex": 4,
+                    "sku": "BG-M14-2424-8P",
+                    "alternatives": [],
+                    "confidence": 0.99,
+                    "reason": "Exact alias CHT-BG14-2424-8 maps to MERV 14 8-pocket bag 24x24x22.",
+                    "substitution": false
+                  }
+                ]
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "container": null,
+          "stop_reason": "tool_use",
+          "stop_sequence": null,
+          "stop_details": null,
+          "usage": {
+            "input_tokens": 8887,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            },
+            "output_tokens": 499,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "service_tier": "standard",
+            "inference_geo": "global"
+          },
+          "diagnostics": null
+        }
+      ]
+    },
+    "draft": {
+      "result": "Subject: Re: PO pricing request - CHT items\n\nHi Darnell,\n\nHere is the pricing for your request:\n\n- CHT-RB14-2424 (SKU BX-M14-242412): 16 EA at $71.67 = $1,146.72\n- CHT-RB14-1224 (SKU BX-M14-122412): 8 EA at $47.52 = $380.16\n- CHT-CO-2025 (SKU CB-M8-20252): 6 CASE at $144.89 = $869.34\n- CHT-HE-2424-G (SKU HP-9997-242412-G): 4 EA at $247.72 = $990.88\n- CHT-BG14-2424-8 (SKU BG-M14-2424-8P): 24 EA at $43.00 = $1,032.00\n\nSubtotal: $4,419.10\nFreight (5 pallets): $600.00\nTotal: $5,019.10\n\nThis is for delivery to your Riverfront warehouse at 1275 Riverfront Industrial Pkwy, Chattanooga TN 37406. I haven't confirmed the 10/12 need-by date in this note.\n\nThanks,\nNorthfield Air Filtration Sales",
+      "prompt": "Write a short, plain reply email to this customer quote request.\n\nRules:\n- Use only the numbers in the facts below, exactly as given. Never calculate a new number.\n- If \"missing\" is not empty, ask only for those fields.\n- If flags include no_match, substitution or short_stock, say so plainly for the affected lines.\n- Do not invent lead times, terms or discounts.\n- Sign off as \"Northfield Air Filtration Sales\".\n\nOriginal email:\n---\nFrom: Darnell Pruitt <dpruitt@cumberlandmro.example>\nSubject: PO pricing request - CHT items\nReceived: 2026-09-28T13:05:00-04:00\n\nHey team,\n\nCan I get updated pricing on these before I cut the PO. Same old Chattanooga numbers we always use:\n\nCHT-RB14-2424 - 16 ea\nCHT-RB14-1224 - 8 ea\nCHT-CO-2025 - 6 cs\nCHT-HE-2424-G - 4 ea\nCHT-BG14-2424-8 - 24 ea\n\nShip to our Riverfront whse (1275 Riverfront Industrial Pkwy, Chattanooga TN 37406). Need by 10/12 if possible.\n\nThanks,\nDarnell Pruitt\nPurchasing Mgr, Cumberland MRO Distribution\n423-555-0170\n\nCONFIDENTIALITY NOTICE: This e-mail is intended only for the addressee.\n---\n\nFacts (JSON):\n{\n  \"customerName\": \"Cumberland MRO Distribution\",\n  \"lines\": [\n    {\n      \"text\": \"CHT-RB14-2424 - 16 ea\",\n      \"sku\": \"BX-M14-242412\",\n      \"sellQty\": 16,\n      \"sellUnit\": \"EA\",\n      \"unitPrice\": 71.67,\n      \"extPrice\": 1146.72\n    },\n    {\n      \"text\": \"CHT-RB14-1224 - 8 ea\",\n      \"sku\": \"BX-M14-122412\",\n      \"sellQty\": 8,\n      \"sellUnit\": \"EA\",\n      \"unitPrice\": 47.52,\n      \"extPrice\": 380.16\n    },\n    {\n      \"text\": \"CHT-CO-2025 - 6 cs\",\n      \"sku\": \"CB-M8-20252\",\n      \"sellQty\": 6,\n      \"sellUnit\": \"CASE\",\n      \"unitPrice\": 144.89,\n      \"extPrice\": 869.34\n    },\n    {\n      \"text\": \"CHT-HE-2424-G - 4 ea\",\n      \"sku\": \"HP-9997-242412-G\",\n      \"sellQty\": 4,\n      \"sellUnit\": \"EA\",\n      \"unitPrice\": 247.72,\n      \"extPrice\": 990.88\n    },\n    {\n      \"text\": \"CHT-BG14-2424-8 - 24 ea\",\n      \"sku\": \"BG-M14-2424-8P\",\n      \"sellQty\": 24,\n      \"sellUnit\": \"EA\",\n      \"unitPrice\": 43,\n      \"extPrice\": 1032\n    }\n  ],\n  \"totals\": {\n    \"subtotal\": 4419.1,\n    \"pallets\": 5,\n    \"volumeDiscount\": 0.05,\n    \"freight\": 600,\n    \"total\": 5019.1\n  },\n  \"flags\": [],\n  \"missing\": []\n}\n",
+      "raw": {
+        "model": "claude-sonnet-5-5",
+        "id": "msg_011CfaPZfqZ8V6uh8zbXCLq8",
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "thinking",
+            "thinking": "",
+            "signature": "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"
+          },
+          {
+            "type": "text",
+            "text": "Subject: Re: PO pricing request - CHT items\n\nHi Darnell,\n\nHere is the pricing for your request:\n\n- CHT-RB14-2424 (SKU BX-M14-242412): 16 EA at $71.67 = $1,146.72\n- CHT-RB14-1224 (SKU BX-M14-122412): 8 EA at $47.52 = $380.16\n- CHT-CO-2025 (SKU CB-M8-20252): 6 CASE at $144.89 = $869.34\n- CHT-HE-2424-G (SKU HP-9997-242412-G): 4 EA at $247.72 = $990.88\n- CHT-BG14-2424-8 (SKU BG-M14-2424-8P): 24 EA at $43.00 = $1,032.00\n\nSubtotal: $4,419.10\nFreight (5 pallets): $600.00\nTotal: $5,019.10\n\nThis is for delivery to your Riverfront warehouse at 1275 Riverfront Industrial Pkwy, Chattanooga TN 37406. I haven't confirmed the 10/12 need-by date in this note.\n\nThanks,\nNorthfield Air Filtration Sales"
+          }
+        ],
+        "container": null,
+        "stop_reason": "end_turn",
+        "stop_sequence": null,
+        "stop_details": null,
+        "usage": {
+          "input_tokens": 1109,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 902,
+          "output_tokens_details": {
+            "thinking_tokens": 510
+          },
+          "service_tier": "standard",
+          "inference_geo": "global"
+        },
+        "diagnostics": null
+      }
+    }
+  }
+}
