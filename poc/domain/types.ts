@@ -65,3 +65,34 @@ export interface AnswerKeyEntry {
   lines: { sku: string | null; qty: number; unit: Unit; note?: string }[]; // sku null = no valid match
   expectedFlags: Flag[];
 }
+
+// ---- Pipeline contract types (shared by domain/, llm/, run.ts) ----
+
+export interface ExtractedLine { text: string; qty: number | null; unit: Unit | null; confidence: number; }
+
+export interface Extraction {
+  customerName: string | null; shipTo: string | null; needBy: string | null; bidDueAt: string | null;
+  targetUnitPrice: number | null;          // only when the customer states a price; used for the below_floor check only
+  lines: ExtractedLine[];
+  fieldConfidence: { customer: number; shipTo: number; needBy: number };
+}
+
+export interface LineMatch {
+  lineIndex: number; sku: string | null; alternatives: string[];
+  confidence: number; reason: string; substitution: boolean;
+}
+
+export interface Allocation { plant: Plant; qty: number; leadTimeDays: number; }
+
+export interface PricedLine {
+  lineIndex: number; sku: string | null; sellQty: number; sellUnit: Unit | null;
+  allocations: Allocation[]; shortQty: number;
+  unitPrice: number; extPrice: number; floorPrice: number; flags: Flag[];
+}
+
+export interface QuoteTotals { subtotal: number; pallets: number; volumeDiscount: number; freight: number; total: number; }
+
+export interface MasterData {
+  products: Product[]; aliases: Alias[]; specs: SpecItem[];
+  customers: Customer[]; pricing: Pricing; inventory: InventoryRow[];
+}
